@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class Duke {
     static String line = "--------------";
-    static String greeting = "Hello! I'm Duke \nWhat can I do for you? \n";
-    static String listMsg = "Here are the tasks in your list: ";
-    static String markMsg = "Nice! I've marked this task as done: ";
-    static String unmarkMsg = "OK, I've marked this task as not done yet: ";
+    static String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+    static String listMsg = "Here are the tasks in your list:";
+    static String markMsg = "Nice! I've marked this task as done:";
+    static String unmarkMsg = "OK, I've marked this task as not done yet:";
 
     static String ending = "Bye. Hope to see you again soon!";
     static int totalTask = 0;
@@ -14,7 +14,7 @@ public class Duke {
     public Duke() {
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownCmdException {
         // start the program
         System.out.println(line);
         System.out.println(greeting);
@@ -22,31 +22,60 @@ public class Duke {
         new Duke().run();
     }
 
-    public static void run() {
+    public static void run()  {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
         while(!exit) {
             String input;
             input = sc.nextLine();
-            String[] cmd = input.split(" ");
+
+            String[] cmd = input.split(" ", 2);
 
             System.out.println(line);
 
-            if(cmd[0].equals("bye")) {
+            if (cmd[0].equals("bye")) {
                 exit = true;
                 System.out.println(ending);
-            } else if(cmd[0].equals("list")) {
+            } else if (cmd[0].equals("list")) {
                 printList();
-            } else if(cmd[0].equals("mark")) {
-                markTask(Integer.parseInt(cmd[1]));
+            } else if (cmd[0].equals("mark")) {
+                try {
+                    if(cmd.length < 2) {
+                        throw new EmptyDescriptionException("mark");
+                    }
+                    markTask(Integer.parseInt(cmd[1]));
 
-            } else if(cmd[0].equals("unmark")) {
-                unmarkTask(Integer.parseInt(cmd[1]));
+                } catch (EmptyDescriptionException e) {
+                    System.out.println(e.getMessage());
+                }
 
+
+            } else if (cmd[0].equals("unmark")) {
+                try {
+                    if(cmd.length < 2){
+                        throw new EmptyDescriptionException("unmark");
+                    }
+                    unmarkTask(Integer.parseInt(cmd[1]));
+
+                } catch (EmptyDescriptionException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if(cmd[0].equals("todo") || cmd[0].equals("deadline") || cmd[0].equals("event") ) {
+                try {
+                    if(cmd.length < 2) {
+                        throw new EmptyDescriptionException(cmd[0]);
+                    }
+                    addTask(cmd[0], cmd[1]);
+                } catch (EmptyDescriptionException e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
-                addTask(input);
+                try {
+                    throw new UnknownCmdException();
+                } catch (UnknownCmdException e) {
+                    System.out.println(e.getMessage());
+                }
             }
-
             System.out.println(line);
         }
     }
@@ -60,43 +89,63 @@ public class Duke {
     }
 
     public static void markTask(int num) {
-        System.out.println(markMsg);
-        tasks[num-1].markAsDone();
-        System.out.println(tasks[num-1].toString());
+
+        try {
+            if(num > totalTask) {
+                throw new ListOutOfBounce(num);
+            } else {
+                System.out.println(markMsg);
+                tasks[num-1].markAsDone();
+                System.out.println(tasks[num-1].toString());
+            }
+        } catch (ListOutOfBounce e){
+            System.out.println(e.getMessage());
+        }
+
+
     }
 
     public static void unmarkTask(int num) {
-        System.out.println(unmarkMsg);
-        tasks[num-1].markAsNotDone();
-        System.out.println(tasks[num-1].toString());
-
+        try {
+            if(num > totalTask) {
+                throw new ListOutOfBounce(num);
+            } else {
+                System.out.println(unmarkMsg);
+                tasks[num-1].markAsNotDone();
+                System.out.println(tasks[num-1].toString());
+            }
+        } catch (ListOutOfBounce e){
+            System.out.println(e.getMessage());
+        }
     }
 
-    public static void addTask(String input) {
-        String[] cmd = input.split(" ", 2);
-        System.out.println("Got it. I've added this task: \n");
+    public static void addTask(String cmd, String task) {
+        // String[] cmd = input.split(" ", 2);
+        System.out.println("Got it. I've added this task:");
 
-        if(cmd[0].equals("todo")) {
-            tasks[totalTask] = new Todo(cmd[1]);
+        if(cmd.equals("todo")) {
+            tasks[totalTask] = new Todo(task);
 
-        } else if(cmd[0].equals("event")) {
-            String[] splitByDate = cmd[1].split("/at",2);
-
-            tasks[totalTask] = new Event(splitByDate[0], splitByDate[1]);
-        } else if(cmd[0].equals("deadline")){
-            String[] splitByDate = cmd[1].split("/by",2);
-            tasks[totalTask] = new Deadline(splitByDate[0], splitByDate[1]);
+        } else if(cmd.equals("event")) {
+            String[] splitByDate = task.split("/at",2);
+            if(splitByDate.length < 2) {
+                tasks[totalTask] = new Event(splitByDate[0], " nil");
+            } else {
+                tasks[totalTask] = new Event(splitByDate[0], splitByDate[1]);
+            }
+        } else if(cmd.equals("deadline")){
+            String[] splitByDate = task.split("/by",2);
+            if(splitByDate.length < 2) {
+                tasks[totalTask] = new Deadline(splitByDate[0], " nil");
+            } else {
+                tasks[totalTask] = new Deadline(splitByDate[0], splitByDate[1]);
+            }
+            // tasks[totalTask] = new Deadline(splitByDate[0], splitByDate[1]);
         }
         System.out.println(tasks[totalTask]);
         totalTask++;
         System.out.println("Now you have " + (totalTask) + " task in the list." );
-
-
-        /* System.out.println("added: "+ cmd);
-        tasks[totalTask] = new Task(cmd);
-        totalTask++;*/
     }
-
 }
 
 class Task {
@@ -162,5 +211,23 @@ class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+}
+
+class EmptyDescriptionException extends Exception {
+    public EmptyDescriptionException(String field) {
+        super("OOPS!!! The description of a " + field + " cannot be empty.");
+    }
+}
+
+class UnknownCmdException extends Exception {
+    public UnknownCmdException() {
+        super("OOPS!!! I'm sorry, but I don't know what that means :-(.");
+    }
+}
+
+class ListOutOfBounce extends Exception {
+    public ListOutOfBounce(int num) {
+        super("Task " + num + " does not exist");
     }
 }
