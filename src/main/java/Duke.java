@@ -1,25 +1,24 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static String line = "--------------";
-    static String greeting = "Hello! I'm Duke\nWhat can I do for you?";
-    static String listMsg = "Here are the tasks in your list:";
-    static String markMsg = "Nice! I've marked this task as done:";
-    static String unmarkMsg = "OK, I've marked this task as not done yet:";
+    private static final String line = "--------------";
 
-    static String ending = "Bye. Hope to see you again soon!";
-    static int totalTask = 0;
-    static Task[] tasks= new Task[100];
+    private static final String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String listMsg = "Here are the tasks in your list:";
+    private static final String markMsg = "Nice! I've marked this task as done:";
+    private static final String unmarkMsg = "OK, I've marked this task as not done yet:";
+    private static final String ending = "Bye. Hope to see you again soon!";
 
-    public Duke() {
-    }
+    private static int totalTask = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void main(String[] args) throws UnknownCmdException {
+    public static void main(String[] args) {
         // start the program
         System.out.println(line);
         System.out.println(greeting);
         System.out.println(line);
-        new Duke().run();
+        run();
     }
 
     public static void run()  {
@@ -48,8 +47,6 @@ public class Duke {
                 } catch (EmptyDescriptionException e) {
                     System.out.println(e.getMessage());
                 }
-
-
             } else if (cmd[0].equals("unmark")) {
                 try {
                     if(cmd.length < 2){
@@ -69,6 +66,20 @@ public class Duke {
                 } catch (EmptyDescriptionException e) {
                     System.out.println(e.getMessage());
                 }
+            } else if(cmd[0].equals("delete")) {
+                try {
+                    if(cmd.length < 2){
+                        throw new EmptyDescriptionException("delete");
+                    } else if(Integer.parseInt(cmd[1]) > totalTask) {
+                        throw new ListOutOfBound(Integer.parseInt(cmd[1]));
+                    }
+                    deleteTask(Integer.parseInt(cmd[1]));
+
+                } catch (EmptyDescriptionException e) {
+                    System.out.println(e.getMessage());
+                } catch (ListOutOfBound e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
                 try {
                     throw new UnknownCmdException();
@@ -83,38 +94,35 @@ public class Duke {
     public static void printList() {
         System.out.println(listMsg);
         for(int i=1; i <= totalTask; i++) {
-            Task temp = tasks[i-1];
-            System.out.println(i+"."+ temp.toString());
+            //Task temp = tasks[i-1];
+            System.out.println(i+"."+ tasks.get(i-1));
         }
     }
 
     public static void markTask(int num) {
-
         try {
             if(num > totalTask) {
-                throw new ListOutOfBounce(num);
+                throw new ListOutOfBound(num);
             } else {
                 System.out.println(markMsg);
-                tasks[num-1].markAsDone();
-                System.out.println(tasks[num-1].toString());
+                tasks.get(num-1).markAsDone();
+                System.out.println(tasks.get(num-1).toString());
             }
-        } catch (ListOutOfBounce e){
+        } catch (ListOutOfBound e){
             System.out.println(e.getMessage());
         }
-
-
     }
 
     public static void unmarkTask(int num) {
         try {
             if(num > totalTask) {
-                throw new ListOutOfBounce(num);
+                throw new ListOutOfBound(num);
             } else {
                 System.out.println(unmarkMsg);
-                tasks[num-1].markAsNotDone();
-                System.out.println(tasks[num-1].toString());
+                tasks.get(num-1).markAsNotDone();
+                System.out.println(tasks.get(num-1).toString());
             }
-        } catch (ListOutOfBounce e){
+        } catch (ListOutOfBound e){
             System.out.println(e.getMessage());
         }
     }
@@ -122,112 +130,35 @@ public class Duke {
     public static void addTask(String cmd, String task) {
         // String[] cmd = input.split(" ", 2);
         System.out.println("Got it. I've added this task:");
+        Task t;
 
         if(cmd.equals("todo")) {
-            tasks[totalTask] = new Todo(task);
-
+            t = new Todo(task);
         } else if(cmd.equals("event")) {
             String[] splitByDate = task.split("/at",2);
             if(splitByDate.length < 2) {
-                tasks[totalTask] = new Event(splitByDate[0], " nil");
+                t = new Event(splitByDate[0], " nil");
             } else {
-                tasks[totalTask] = new Event(splitByDate[0], splitByDate[1]);
+                t = new Event(splitByDate[0], splitByDate[1]);
             }
-        } else if(cmd.equals("deadline")){
+        } else {
             String[] splitByDate = task.split("/by",2);
             if(splitByDate.length < 2) {
-                tasks[totalTask] = new Deadline(splitByDate[0], " nil");
+                t = new Deadline(splitByDate[0], " nil");
             } else {
-                tasks[totalTask] = new Deadline(splitByDate[0], splitByDate[1]);
+                t = new Deadline(splitByDate[0], splitByDate[1]);
             }
-            // tasks[totalTask] = new Deadline(splitByDate[0], splitByDate[1]);
         }
-        System.out.println(tasks[totalTask]);
+        tasks.add(t);
+        System.out.println(t);
         totalTask++;
         System.out.println("Now you have " + (totalTask) + " task in the list." );
     }
-}
 
-class Task {
-    String description;
-    boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-    public String getStatusIcon() {
-        return (isDone? "[X] ":"[ ] ");
-    }
-
-    public void markAsDone() { isDone = true;}
-
-    public void markAsNotDone() {
-        isDone = false;
-    }
-
-   //  @Override
-    public String toString() {
-        return getStatusIcon() + description;
-    }
-}
-
-class Deadline extends Task {
-    protected String by;
-
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
-    }
-}
-
-class Event extends Task {
-    protected String at;
-
-    public Event(String description, String at) {
-        super(description);
-        this.at = at;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
-    }
-}
-
-class Todo extends Task {
-   //  protected String by;
-
-    public Todo(String description) {
-        super(description);
-        // this.by = by;
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-
-class EmptyDescriptionException extends Exception {
-    public EmptyDescriptionException(String field) {
-        super("OOPS!!! The description of a " + field + " cannot be empty.");
-    }
-}
-
-class UnknownCmdException extends Exception {
-    public UnknownCmdException() {
-        super("OOPS!!! I'm sorry, but I don't know what that means :-(.");
-    }
-}
-
-class ListOutOfBounce extends Exception {
-    public ListOutOfBounce(int num) {
-        super("Task " + num + " does not exist");
+    public static void deleteTask(int num) {
+        System.out.println("Noted! I've removed this task:");
+        tasks.remove(num-1);
+        totalTask--;
+        System.out.println("Now you have " + (totalTask) + " task in the list." );
     }
 }
