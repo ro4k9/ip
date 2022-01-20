@@ -1,5 +1,5 @@
 class ListOutOfBound extends Exception {
     public ListOutOfBound(int num) {
-        super("Task " + num + " does not exist");
+        super("OOPS!!! You exceeded the bound!!\nTask " + num + " does not exist.");
     }
 }
