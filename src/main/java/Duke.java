@@ -2,8 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Duke class provides the functionality for Duke chatbot.
+ *
+ * @author Rosa Kang
+ */
 public class Duke {
+    /**
+     * Represents the list of tasks added by the user.
+     */
     protected List<Task> tasks;
+    /**
+     * For the display of the text on the console.
+     */
     protected Display display;
 
     public Duke() {
@@ -12,10 +23,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        // start the program
         new Duke().run();
     }
 
+    /**
+     * Execute the command corresponding to the user input
+     */
     public void run() {
         display.greeting();
         Scanner sc = new Scanner(System.in);
@@ -55,6 +68,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to mark the task complete
+     *
+     * @param cmd An array of String containing the user input split by whitespace
+     */
     public void markTask(String[] cmd) {
         try {
             if (cmd.length < 2) {
@@ -74,6 +92,11 @@ public class Duke {
 
     }
 
+    /**
+     * A method to unmark the task that had been marked complete
+     *
+     * @param cmd An array of String containing the user input split by whitespace
+     */
     public void unmarkTask(String[] cmd) {
         try {
             if (cmd.length < 2) {
@@ -92,6 +115,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to add  a new todo into tasks list
+     *
+     * @param cmd An array of String containing the user input split by whitespace
+     */
     public void addTodo(String[] cmd) {
         try {
             if (cmd.length < 2) {
@@ -106,6 +134,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to add  a new event into tasks list
+     *
+     * @param cmd An array of String containing the user input split by whitespace
+     */
     public void addEvent(String[] cmd) {
         try {
             if (cmd.length < 2) {
@@ -125,6 +158,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to add  a new deadline into tasks list
+     *
+     * @param cmd An array of String containing the user input split by whitespace
+     */
     public void addDeadline(String[] cmd) {
         try {
             if (cmd.length < 2) {
@@ -145,6 +183,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to delete an existing task in tasks list
+     *
+     * @param cmd An array of String containing the user input split by whitespace
+     */
     public void deleteTask(String[] cmd) {
         try {
             if (cmd.length < 2) {

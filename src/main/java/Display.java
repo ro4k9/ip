@@ -1,5 +1,10 @@
 import java.util.List;
 
+/**
+ * A class for displaying
+ *
+ * @author Rosa Kang
+ */
 public class Display {
     private static final String line = "------------------------------------------";
     private static final String greeting = "-> Hi I'm Duke~\n-> What can I do for you?";
@@ -9,12 +14,20 @@ public class Display {
     private static final String farewellMsg = "~*~*Cya soon*~*~!";
     private static final String addTaskMsg = "Gotcha~ I've added this task:";
     private static final String deleteTaskMsg = "Noted~ I've removed this task:";
-
     protected List<Task> tasks;
+
+    /**
+     * Constructor for Display
+     *
+     * @param tasks a list of tasks
+     */
     Display(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * A method to display greeting message
+     */
     public void greeting() {
         System.out.println(" n____n");
         System.out.println("( o v o ) n");
@@ -23,6 +36,9 @@ public class Display {
         System.out.println(line);
     }
 
+    /**
+     * A method to display the list
+     */
     public void lists() {
         System.out.println("  n____n");
         System.out.println(" ( o v o )");
@@ -36,6 +52,9 @@ public class Display {
         System.out.println(line);
     }
 
+    /**
+     * A method to display farewell
+     */
     public void farewell() {
         System.out.println("   n____n");
         System.out.println("n ( o v o )");
@@ -44,6 +63,9 @@ public class Display {
         System.out.println(line);
     }
 
+    /**
+     * A method to display a task that has been marked
+     */
     public void mark(String taskName) {
         System.out.println("   n____n");
         System.out.println("  ( > v < )n");
@@ -53,6 +75,9 @@ public class Display {
         System.out.println(line);
     }
 
+    /**
+     * A method to display a task that has been unmarked
+     */
     public void unmark(String taskName) {
         System.out.println("   n____n");
         System.out.println("  ( o _ o )");
@@ -62,6 +87,9 @@ public class Display {
         System.out.println(line);
     }
 
+    /**
+     * A method to display tasks that has been added
+     */
     public void tasks(Task t, int total) {
         System.out.println("   n____n");
         System.out.println("  ( ^ v ^ )");
@@ -72,6 +100,9 @@ public class Display {
         System.out.println(line);
     }
 
+    /**
+     * A method to display deleted task
+     */
     public void delete(Task t, int total) {
         System.out.println("   n____n");
         System.out.println("  ( o n o )");
