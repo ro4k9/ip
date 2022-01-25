@@ -24,6 +24,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     /**
      * A method that display completion status in string
      *
@@ -58,6 +63,6 @@ public class Task {
     }
 
      public String format() {
-        return (isDone? "1 " : "0 ") + description;
+        return (isDone? "1|" : "0|") + description;
     }
 }

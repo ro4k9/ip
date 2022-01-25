@@ -14,15 +14,14 @@ public class Display {
     private static final String farewellMsg = "~*~*Cya soon*~*~!";
     private static final String addTaskMsg = "Gotcha~ I've added this task:";
     private static final String deleteTaskMsg = "Noted~ I've removed this task:";
-    protected List<Task> tasks;
+    //protected List<Task> tasks;
 
     /**
      * Constructor for Display
      *
-     * @param tasks a list of tasks
      */
-    Display(List<Task> tasks) {
-        this.tasks = tasks;
+    Display() {
+        //this.tasks = tasks;
     }
 
     /**
@@ -46,7 +45,7 @@ public class Display {
         System.out.println(listMsg);
 
         for (int i = 0; i < lst.size(); i++) {
-            System.out.println(taskLine(lst.get(i)));
+            System.out.println("    " + (i+1) + "." + taskLine(lst.get(i)));
             // System.out.println("    " + i + "." + tasks.get(i - 1));
         }
 
@@ -115,9 +114,10 @@ public class Display {
     }
 
     public String taskLine(String data) {
-        String[] input = data.split(" ");
+        String[] input = data.split("\\|",4);
         String temp;
         temp ="";
+
         if(input[0].equals("T")) {
           temp += "[T]";
         } else  if(input[0].equals("E")) {
@@ -133,6 +133,7 @@ public class Display {
         }
 
         temp += input[2];
+
 
         if(input[0].equals("D")) {
             temp += " (by:" + input[3] + ")";

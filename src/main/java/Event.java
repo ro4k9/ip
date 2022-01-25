@@ -20,6 +20,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
+        this.at = at;
+    }
+
 
     /**
      * toString method for Event.
@@ -32,6 +37,6 @@ public class Event extends Task {
     }
 
     public String format() {
-        return "E " + super.format() + at;
+        return "E|" + super.format() +"|" +at;
     }
 }

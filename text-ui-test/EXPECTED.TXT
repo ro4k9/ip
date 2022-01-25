@@ -22,28 +22,28 @@ Now you have 2 task in the list.
   ( ^ v ^ )
 ---u-----u--------------------------------
 Gotcha~ I've added this task:
-    [E][ ] test3  (at: Mon 2-4pm)
+    [E][ ] test3 (at: Mon 2-4pm)
 Now you have 3 task in the list.
 ------------------------------------------
    n____n
   ( ^ v ^ )
 ---u-----u--------------------------------
 Gotcha~ I've added this task:
-    [E][ ] test4  (at: Mon 2-4pm)
+    [E][ ] test4 (at: Mon 2-4pm)
 Now you have 4 task in the list.
 ------------------------------------------
    n____n
   ( ^ v ^ )
 ---u-----u--------------------------------
 Gotcha~ I've added this task:
-    [D][ ] test5  (by: June 6th)
+    [D][ ] test5 (by: June 6th)
 Now you have 5 task in the list.
 ------------------------------------------
    n____n
   ( ^ v ^ )
 ---u-----u--------------------------------
 Gotcha~ I've added this task:
-    [D][ ] test6  (by: June 6th)
+    [D][ ] test6 (by: June 6th)
 Now you have 6 task in the list.
 ------------------------------------------
   n____n
@@ -52,10 +52,10 @@ Now you have 6 task in the list.
 -> Here are the tasks in your list:
     1.[T][ ] test1
     2.[T][ ] test2
-    3.[E][ ] test3  (at: Mon 2-4pm)
-    4.[E][ ] test4  (at: Mon 2-4pm)
-    5.[D][ ] test5  (by: June 6th)
-    6.[D][ ] test6  (by: June 6th)
+    3.[E][ ] test3 (at: Mon 2-4pm)
+    4.[E][ ] test4 (at: Mon 2-4pm)
+    5.[D][ ] test5 (by: June 6th)
+    6.[D][ ] test6 (by: June 6th)
 ------------------------------------------
    n____n
   ( > v < )n
@@ -73,25 +73,25 @@ Nice~ I've marked this task as *done*:
   ( > v < )n
 ---u--------------------------------------
 Nice~ I've marked this task as *done*:
-    [E][X] test3  (at: Mon 2-4pm)
+    [E][X] test3 (at: Mon 2-4pm)
 ------------------------------------------
    n____n
   ( > v < )n
 ---u--------------------------------------
 Nice~ I've marked this task as *done*:
-    [E][X] test4  (at: Mon 2-4pm)
+    [E][X] test4 (at: Mon 2-4pm)
 ------------------------------------------
    n____n
   ( > v < )n
 ---u--------------------------------------
 Nice~ I've marked this task as *done*:
-    [D][X] test5  (by: June 6th)
+    [D][X] test5 (by: June 6th)
 ------------------------------------------
    n____n
   ( > v < )n
 ---u--------------------------------------
 Nice~ I've marked this task as *done*:
-    [D][X] test6  (by: June 6th)
+    [D][X] test6 (by: June 6th)
 ------------------------------------------
   n____n
  ( o v o )
@@ -99,10 +99,10 @@ Nice~ I've marked this task as *done*:
 -> Here are the tasks in your list:
     1.[T][X] test1
     2.[T][X] test2
-    3.[E][X] test3  (at: Mon 2-4pm)
-    4.[E][X] test4  (at: Mon 2-4pm)
-    5.[D][X] test5  (by: June 6th)
-    6.[D][X] test6  (by: June 6th)
+    3.[E][X] test3 (at: Mon 2-4pm)
+    4.[E][X] test4 (at: Mon 2-4pm)
+    5.[D][X] test5 (by: June 6th)
+    6.[D][X] test6 (by: June 6th)
 ------------------------------------------
    n____n
   ( o _ o )
@@ -120,25 +120,25 @@ Okie~ I've marked this task as *not done* yet:
   ( o _ o )
 ------------------------------------------
 Okie~ I've marked this task as *not done* yet:
-    [E][ ] test3  (at: Mon 2-4pm)
+    [E][ ] test3 (at: Mon 2-4pm)
 ------------------------------------------
    n____n
   ( o _ o )
 ------------------------------------------
 Okie~ I've marked this task as *not done* yet:
-    [E][ ] test4  (at: Mon 2-4pm)
+    [E][ ] test4 (at: Mon 2-4pm)
 ------------------------------------------
    n____n
   ( o _ o )
 ------------------------------------------
 Okie~ I've marked this task as *not done* yet:
-    [D][ ] test5  (by: June 6th)
+    [D][ ] test5 (by: June 6th)
 ------------------------------------------
    n____n
   ( o _ o )
 ------------------------------------------
 Okie~ I've marked this task as *not done* yet:
-    [D][ ] test6  (by: June 6th)
+    [D][ ] test6 (by: June 6th)
 ------------------------------------------
   n____n
  ( o v o )
@@ -146,10 +146,10 @@ Okie~ I've marked this task as *not done* yet:
 -> Here are the tasks in your list:
     1.[T][ ] test1
     2.[T][ ] test2
-    3.[E][ ] test3  (at: Mon 2-4pm)
-    4.[E][ ] test4  (at: Mon 2-4pm)
-    5.[D][ ] test5  (by: June 6th)
-    6.[D][ ] test6  (by: June 6th)
+    3.[E][ ] test3 (at: Mon 2-4pm)
+    4.[E][ ] test4 (at: Mon 2-4pm)
+    5.[D][ ] test5 (by: June 6th)
+    6.[D][ ] test6 (by: June 6th)
 ------------------------------------------
    n____n
   ( o n o )
@@ -162,14 +162,14 @@ Now you have 5 task in the list.
   ( o n o )
 ------------------------------------------
 Noted~ I've removed this task:
-    [E][ ] test3  (at: Mon 2-4pm)
+    [E][ ] test3 (at: Mon 2-4pm)
 Now you have 4 task in the list.
 ------------------------------------------
    n____n
   ( o n o )
 ------------------------------------------
 Noted~ I've removed this task:
-    [D][ ] test5  (by: June 6th)
+    [D][ ] test5 (by: June 6th)
 Now you have 3 task in the list.
 ------------------------------------------
   n____n
@@ -177,8 +177,8 @@ Now you have 3 task in the list.
 --u-----u---------------------------------
 -> Here are the tasks in your list:
     1.[T][ ] test2
-    2.[E][ ] test4  (at: Mon 2-4pm)
-    3.[D][ ] test6  (by: June 6th)
+    2.[E][ ] test4 (at: Mon 2-4pm)
+    3.[D][ ] test6 (by: June 6th)
 ------------------------------------------
 OOPS!!! The description of a todo cannot be empty.
 OOPS!!! The description of a event cannot be empty.
@@ -190,8 +190,8 @@ OOPS!!! The description of a unmark cannot be empty.
 --u-----u---------------------------------
 -> Here are the tasks in your list:
     1.[T][ ] test2
-    2.[E][ ] test4  (at: Mon 2-4pm)
-    3.[D][ ] test6  (by: June 6th)
+    2.[E][ ] test4 (at: Mon 2-4pm)
+    3.[D][ ] test6 (by: June 6th)
 ------------------------------------------
 OOPS!!! You exceeded the bound!!
 Task 4 does not exist.
@@ -203,8 +203,8 @@ Task 4 does not exist.
 --u-----u---------------------------------
 -> Here are the tasks in your list:
     1.[T][ ] test2
-    2.[E][ ] test4  (at: Mon 2-4pm)
-    3.[D][ ] test6  (by: June 6th)
+    2.[E][ ] test4 (at: Mon 2-4pm)
+    3.[D][ ] test6 (by: June 6th)
 ------------------------------------------
 The second argument of the mark must be an integer.
 The second argument of the unmark must be an integer.

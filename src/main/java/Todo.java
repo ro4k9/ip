@@ -13,6 +13,9 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
     /**
      * toString method for Event.
      *
@@ -25,6 +28,6 @@ public class Todo extends Task {
     }
 
     public String format() {
-        return "T " + super.format();
+        return "T|" + super.format();
     }
 }
