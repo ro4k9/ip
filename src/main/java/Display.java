@@ -39,14 +39,15 @@ public class Display {
     /**
      * A method to display the list
      */
-    public void lists() {
+    public void lists(List<String> lst) {
         System.out.println("  n____n");
         System.out.println(" ( o v o )");
         System.out.println("--u-----u---------------------------------");
         System.out.println(listMsg);
 
-        for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println("    " + i + "." + tasks.get(i - 1));
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println(taskLine(lst.get(i)));
+            // System.out.println("    " + i + "." + tasks.get(i - 1));
         }
 
         System.out.println(line);
@@ -83,6 +84,7 @@ public class Display {
         System.out.println("  ( o _ o )");
         System.out.println(line);
         System.out.println(unmarkMsg);
+        // System.out.println("    " + taskLine());
         System.out.println("    " + taskName);
         System.out.println(line);
     }
@@ -111,5 +113,34 @@ public class Display {
         System.out.println("    " + t);
         System.out.println("Now you have " + total + " task in the list.");
         System.out.println(line);
+    }
+
+    public String taskLine(String data) {
+        String[] input = data.split(" ");
+        String temp;
+        temp ="";
+        if(input[0].equals("T")) {
+          temp += "[T]";
+        } else  if(input[0].equals("E")) {
+            temp+= "[E]";
+        } else {
+            temp+= "[D]";
+        }
+
+        if(input[1] == "1") {
+            temp +="[X] ";
+        } else {
+            temp+="[ ] ";
+        }
+
+        temp += input[2];
+
+        if(input[0].equals("D")) {
+            temp += " (by:" + input[3] + ")";
+        } else if(input[0].equals("E")) {
+            temp+= " (at:" + input[3] + ")";
+        }
+
+        return temp;
     }
 }

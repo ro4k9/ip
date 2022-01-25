@@ -1,6 +1,12 @@
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Duke class provides the functionality for Duke chatbot.
@@ -16,20 +22,35 @@ public class Duke {
      * For the display of the text on the console.
      */
     protected Display display;
+    protected File f;
+    protected String path;
 
     public Duke() {
         tasks = new ArrayList<>();
         display = new Display(tasks);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  throws IOException{
         new Duke().run();
     }
 
     /**
      * Execute the command corresponding to the user input
      */
-    public void run() {
+    public void run() throws IOException{
+        path = "data/duke.txt";
+        f = new File(path);
+        f.getParentFile().mkdirs();
+
+        try {
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         display.greeting();
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
@@ -45,7 +66,7 @@ public class Duke {
                     display.farewell();
                     exit = true;
                 } else if (cmd[0].equals("list")) {
-                    display.lists();
+                    showList();
                 } else if (cmd[0].equals("mark")) {
                     markTask(cmd);
                 } else if (cmd[0].equals("unmark")) {
@@ -68,6 +89,11 @@ public class Duke {
         }
     }
 
+    public void showList() throws IOException {
+        List<String> texts =  Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
+        display.lists(texts);
+    }
+
     /**
      * A method to mark the task complete
      *
@@ -83,11 +109,16 @@ public class Duke {
                 throw new ListOutOfBound(num);
             }
             tasks.get(num - 1).markAsDone();
+
+            changeMarkOnFile(path, num-1, true);
+
             display.mark(tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("The second argument of the " + cmd[0] + " must be an integer.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -107,11 +138,15 @@ public class Duke {
                 throw new ListOutOfBound(num);
             }
             tasks.get(num - 1).markAsNotDone();
+            // change status in txt file
+            changeMarkOnFile(path, num-1, false);
             display.unmark(tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("The second argument of the " + cmd[0] + " must be an integer.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -129,8 +164,11 @@ public class Duke {
             t = new Todo(cmd[1]);
             tasks.add(t);
             display.tasks(t, tasks.size());
+            appendToFile(path, t.toString());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
+        } catch(IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -145,16 +183,19 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             Task t;
-            String[] temp = cmd[1].split("/at", 2);
+            String[] temp = cmd[1].split(" /at", 2);
 
             if (temp.length < 2) {
                 t = new Event(temp[0], " nil");
             } else t = new Event(temp[0], temp[1]);
 
             tasks.add(t);
+            appendToFile(path, t.toString());
             display.tasks(t, tasks.size());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -169,7 +210,7 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             Task t;
-            String[] temp = cmd[1].split("/by", 2);
+            String[] temp = cmd[1].split(" /by", 2);
 
             if (temp.length < 2) {
                 t = new Deadline(temp[0], " nil");
@@ -177,9 +218,12 @@ public class Duke {
                 t = new Deadline(temp[0], temp[1]);
             }
             tasks.add(t);
+            appendToFile(path, t.toString());
             display.tasks(t, tasks.size());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -206,5 +250,19 @@ public class Duke {
         } catch (NumberFormatException e) {
             System.out.println("The second argument of the " + cmd[0] + " must be an integer.");
         }
+    }
+
+    private void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend+ "\n");
+        fw.close();
+    }
+
+    private void changeMarkOnFile(String filePath, int n, boolean isDone) throws IOException{
+        List<String> texts =  Files.readAllLines(Paths.get(filePath), StandardCharsets.US_ASCII);
+        String temp = texts.get(n);
+        String data = temp.replace(temp.substring(2,3), (isDone? "1":"0"));
+        texts.set(n, data);
+        Files.write(Paths.get(filePath), texts, StandardCharsets.US_ASCII);
     }
 }

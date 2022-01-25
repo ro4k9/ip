@@ -18,8 +18,12 @@ public class Todo extends Task {
      *
      * @return type of the task (event) marked by E and the description of the task followed by the date
      */
+
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "T " + super.toString();
     }
+    /* public String toString() {
+        return "[T]" + super.toString();
+    }*/
 }
