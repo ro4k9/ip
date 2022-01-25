@@ -84,7 +84,6 @@ public class Display {
         System.out.println("  ( o _ o )");
         System.out.println(line);
         System.out.println(unmarkMsg);
-        // System.out.println("    " + taskLine());
         System.out.println("    " + taskName);
         System.out.println(line);
     }
@@ -92,12 +91,12 @@ public class Display {
     /**
      * A method to display tasks that has been added
      */
-    public void tasks(Task t, int total) {
+    public void tasks(String taskName, int total) {
         System.out.println("   n____n");
         System.out.println("  ( ^ v ^ )");
         System.out.println("---u-----u--------------------------------");
         System.out.println(addTaskMsg);
-        System.out.println("    " + t);
+        System.out.println("    " + taskName);
         System.out.println("Now you have " + total + " task in the list.");
         System.out.println(line);
     }
@@ -127,7 +126,7 @@ public class Display {
             temp+= "[D]";
         }
 
-        if(input[1] == "1") {
+        if(input[1].equals("1")) {
             temp +="[X] ";
         } else {
             temp+="[ ] ";

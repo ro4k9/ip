@@ -160,11 +160,11 @@ public class Duke {
             if (cmd.length < 2) {
                 throw new EmptyDescriptionException(cmd[0]);
             }
-            Task t;
+            Todo t;
             t = new Todo(cmd[1]);
             tasks.add(t);
-            display.tasks(t, tasks.size());
-            appendToFile(path, t.toString());
+            display.tasks(t.toString(), tasks.size());
+            appendToFile(path, t.format());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch(IOException e) {
@@ -182,7 +182,7 @@ public class Duke {
             if (cmd.length < 2) {
                 throw new EmptyDescriptionException(cmd[0]);
             }
-            Task t;
+            Event t;
             String[] temp = cmd[1].split(" /at", 2);
 
             if (temp.length < 2) {
@@ -190,8 +190,8 @@ public class Duke {
             } else t = new Event(temp[0], temp[1]);
 
             tasks.add(t);
-            appendToFile(path, t.toString());
-            display.tasks(t, tasks.size());
+            appendToFile(path, t.format());
+            display.tasks(t.toString(), tasks.size());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -209,7 +209,7 @@ public class Duke {
             if (cmd.length < 2) {
                 throw new EmptyDescriptionException(cmd[0]);
             }
-            Task t;
+            Deadline t;
             String[] temp = cmd[1].split(" /by", 2);
 
             if (temp.length < 2) {
@@ -218,8 +218,8 @@ public class Duke {
                 t = new Deadline(temp[0], temp[1]);
             }
             tasks.add(t);
-            appendToFile(path, t.toString());
-            display.tasks(t, tasks.size());
+            appendToFile(path, t.format());
+            display.tasks(t.toString(), tasks.size());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {

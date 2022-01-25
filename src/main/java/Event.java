@@ -20,16 +20,18 @@ public class Event extends Task {
         this.at = at;
     }
 
+
     /**
      * toString method for Event.
      *
      * @return type of the task (event) marked by E and the description of the task followed by the date
      */
     @Override
-    public String toString() {
-        return "E " + super.toString() + at;
-    }
-    /* public String toString() {
+     public String toString() {
         return "[E]" + super.toString() + " (at:" + at + ")";
-    }*/
+    }
+
+    public String format() {
+        return "E " + super.format() + at;
+    }
 }

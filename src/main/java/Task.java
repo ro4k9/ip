@@ -54,9 +54,10 @@ public class Task {
      */
     @Override
     public String toString() {
+        return getStatusIcon() + description;
+    }
+
+     public String format() {
         return (isDone? "1 " : "0 ") + description;
     }
-    /*public String toString() {
-        return getStatusIcon() + description;
-    } */
 }
