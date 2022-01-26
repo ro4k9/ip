@@ -1,7 +1,4 @@
 package duke;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -39,12 +36,7 @@ public class Event extends Task {
      */
     @Override
      public String toString()  {
-        if(isValidDate(at)) {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate date = LocalDate.parse(at, format);
-            at = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        }
-        return "[E]" + super.toString() + " (at:" + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     public String format() {

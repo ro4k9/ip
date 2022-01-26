@@ -1,5 +1,4 @@
 package duke;
-
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -178,7 +177,7 @@ public class Duke {
 
             if (temp.length < 2) {
                 t = new Event(temp[0], " nil");
-            } else t = new Event(temp[0], temp[1]);
+            } else t = new Event(temp[0], p.convertDate(temp[1]));
 
             tasks.add(t);
             s.appendToFile(t.format());
@@ -206,7 +205,7 @@ public class Duke {
             if (temp.length < 2) {
                 t = new Deadline(temp[0], " nil");
             } else {
-                t = new Deadline(temp[0], temp[1]);
+                t = new Deadline(temp[0], p.convertDate(temp[1]));
             }
             tasks.add(t);
             s.appendToFile(t.format());

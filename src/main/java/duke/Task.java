@@ -57,16 +57,7 @@ public class Task {
         isDone = false;
     }
 
-    public boolean isValidDate(String date) {
-        try {
-            DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-            format.setLenient(false);
-            format.parse(date);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
+
 
     /**
      * toString method of the task
