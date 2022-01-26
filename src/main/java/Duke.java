@@ -28,6 +28,7 @@ public class Duke {
      */
     protected Ui ui;
     protected Storage s;
+    protected Parser p;
     // protected File f;
     // protected String path;
 
@@ -36,6 +37,7 @@ public class Duke {
        tasks = new ArrayList<>();
        ui = new Ui(tasks);
        s= new Storage("data/duke.txt", tasks);
+       p = new Parser();
     }
 
     public static void main(String[] args) throws IOException {
@@ -54,11 +56,12 @@ public class Duke {
         while (!exit) {
             String input;
             input = sc.nextLine();
+
             try {
                 if (input.isEmpty()) {
                     throw new EmptyDescriptionException();
                 }
-                String[] cmd = input.split(" ", 2);
+                String[] cmd = p.parseCommand(input); //input.split(" ", 2);
                 if (cmd[0].equals("bye")) {
                     ui.farewell();
                     exit = true;
@@ -177,7 +180,7 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             Event t;
-            String[] temp = cmd[1].split(" /at", 2);
+            String[] temp = p.parseDateAt(cmd[1]);
 
             if (temp.length < 2) {
                 t = new Event(temp[0], " nil");
@@ -204,7 +207,7 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             Deadline t;
-            String[] temp = cmd[1].split(" /by", 2);
+            String[] temp = p.parseDateBy(cmd[1]);
 
             if (temp.length < 2) {
                 t = new Deadline(temp[0], " nil");
