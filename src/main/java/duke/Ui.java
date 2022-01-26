@@ -6,14 +6,14 @@ package duke;
  * @author Rosa Kang
  */
 public class Ui {
-    private static final String line = "------------------------------------------";
-    private static final String greeting = "-> Hi I'm Duke~\n-> What can I do for you?";
-    private static final String listMsg = "-> Here are the tasks in your list:";
-    private static final String markMsg = "Nice~ I've marked this task as *done*:";
-    private static final String unmarkMsg = "Okie~ I've marked this task as *not done* yet:";
-    private static final String farewellMsg = "~*~*Cya soon*~*~!";
-    private static final String addTaskMsg = "Gotcha~ I've added this task:";
-    private static final String deleteTaskMsg = "Noted~ I've removed this task:";
+    private static final String LINE = "------------------------------------------";
+    private static final String GREETING_MSG = "-> Hi I'm Duke~\n-> What can I do for you?";
+    private static final String LIST_MSG = "-> Here are the tasks in your list:";
+    private static final String MARK_MSG = "Nice~ I've marked this task as *done*:";
+    private static final String UNMARK_MSG = "Okie~ I've marked this task as *not done* yet:";
+    private static final String FAREWELL_MSG = "~*~*Cya soon*~*~!";
+    private static final String ADD_MSG = "Gotcha~ I've added this task:";
+    private static final String DELETE_MSG = "Noted~ I've removed this task:";
     protected TaskList tasks;
 
     /**
@@ -29,9 +29,9 @@ public class Ui {
     public void greeting() {
         System.out.println(" n____n");
         System.out.println("( o v o ) n");
-        System.out.println(line);
-        System.out.println(greeting);
-        System.out.println(line);
+        System.out.println(LINE);
+        System.out.println(GREETING_MSG);
+        System.out.println(LINE);
     }
 
     /**
@@ -41,14 +41,14 @@ public class Ui {
         System.out.println("  n____n");
         System.out.println(" ( o v o )");
         System.out.println("--u-----u---------------------------------");
-        System.out.println(listMsg);
+        System.out.println(LIST_MSG);
 
         for (int i = 0; i < tasks.size(); i++) {
             // System.out.println("    " + (i+1) + "." + taskLine(lst.get(i)));
             System.out.println("    " + (i + 1) + "." + tasks.get(i));
         }
 
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     /**
@@ -57,9 +57,9 @@ public class Ui {
     public void farewell() {
         System.out.println("   n____n");
         System.out.println("n ( o v o )");
-        System.out.println(line);
-        System.out.println(farewellMsg);
-        System.out.println(line);
+        System.out.println(LINE);
+        System.out.println(FAREWELL_MSG);
+        System.out.println(LINE);
     }
 
     /**
@@ -69,9 +69,9 @@ public class Ui {
         System.out.println("   n____n");
         System.out.println("  ( > v < )n");
         System.out.println("---u--------------------------------------");
-        System.out.println(markMsg);
+        System.out.println(MARK_MSG);
         System.out.println("    " + taskName);
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     /**
@@ -80,10 +80,10 @@ public class Ui {
     public void unmark(String taskName) {
         System.out.println("   n____n");
         System.out.println("  ( o _ o )");
-        System.out.println(line);
-        System.out.println(unmarkMsg);
+        System.out.println(LINE);
+        System.out.println(UNMARK_MSG);
         System.out.println("    " + taskName);
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     /**
@@ -93,10 +93,10 @@ public class Ui {
         System.out.println("   n____n");
         System.out.println("  ( ^ v ^ )");
         System.out.println("---u-----u--------------------------------");
-        System.out.println(addTaskMsg);
+        System.out.println(ADD_MSG);
         System.out.println("    " + taskName);
         System.out.println("Now you have " + total + " task in the list.");
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     /**
@@ -105,10 +105,10 @@ public class Ui {
     public void delete(Task t, int total) {
         System.out.println("   n____n");
         System.out.println("  ( o n o )");
-        System.out.println(line);
-        System.out.println(deleteTaskMsg);
+        System.out.println(LINE);
+        System.out.println(DELETE_MSG);
         System.out.println("    " + t);
         System.out.println("Now you have " + total + " task in the list.");
-        System.out.println(line);
+        System.out.println(LINE);
     }
 }
