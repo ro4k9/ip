@@ -1,9 +1,6 @@
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +8,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/*
+* TODO: Ui: deals with interactions with the user v 
+* TODO: Storage: deals with loading tasks from the file and saving tasks in the file
+* TODO: Parser: deals with making sense of the user command
+* TODO: TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
+*
+*
+*
+* */
 /**
  * Duke class provides the functionality for Duke chatbot.
  *
@@ -25,14 +31,14 @@ public class Duke {
     /**
      * For the display of the text on the console.
      */
-    protected Display display;
+    protected Ui ui;
     protected File f;
     protected String path;
 
     public Duke() {
        // texts = new ArrayList<>();
        tasks = new ArrayList<>();
-       display = new Display(tasks);
+       ui = new Ui(tasks);
     }
 
     public static void main(String[] args) throws IOException {
@@ -58,7 +64,7 @@ public class Duke {
 
         // texts = Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
         load(path);
-        display.greeting();
+        ui.greeting();
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
         while (!exit) {
@@ -70,7 +76,7 @@ public class Duke {
                 }
                 String[] cmd = input.split(" ", 2);
                 if (cmd[0].equals("bye")) {
-                    display.farewell();
+                    ui.farewell();
                     exit = true;
                 } else if (cmd[0].equals("list")) {
                     showList();
@@ -97,8 +103,8 @@ public class Duke {
     }
 
     public void showList() throws IOException {
-        //List<String> texts =  Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
-        display.lists();//tasks);
+        List<String> texts =  Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
+        ui.lists(texts);
     }
 
     /**
@@ -117,7 +123,7 @@ public class Duke {
             }
             tasks.get(num - 1).markAsDone();
             changeMarkInFile(path, num-1, true);
-            display.mark(tasks.get(num-1).toString());//tasks.get(num - 1).toString());
+            ui.mark(tasks.get(num-1).toString());//tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
@@ -145,7 +151,7 @@ public class Duke {
             tasks.get(num - 1).markAsNotDone();
             // change status in txt file
             changeMarkInFile(path, num-1, false);
-            display.unmark(tasks.get(num - 1).toString());
+            ui.unmark(tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
@@ -168,7 +174,7 @@ public class Duke {
             Todo t;
             t = new Todo(cmd[1]);
             tasks.add(t);
-            display.tasks(t.toString(), tasks.size());
+            ui.tasks(t.toString(), tasks.size());
             appendToFile(path, t.format());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
@@ -188,7 +194,7 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             Event t;
-            String[] temp = cmd[1].split(" /at ", 2);
+            String[] temp = cmd[1].split(" /at", 2);
 
             if (temp.length < 2) {
                 t = new Event(temp[0], " nil");
@@ -196,7 +202,7 @@ public class Duke {
 
             tasks.add(t);
             appendToFile(path, t.format());
-            display.tasks(t.toString(), tasks.size());
+            ui.tasks(t.toString(), tasks.size());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -215,7 +221,7 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             Deadline t;
-            String[] temp = cmd[1].split(" /by ", 2);
+            String[] temp = cmd[1].split(" /by", 2);
 
             if (temp.length < 2) {
                 t = new Deadline(temp[0], " nil");
@@ -224,7 +230,7 @@ public class Duke {
             }
             tasks.add(t);
             appendToFile(path, t.format());
-            display.tasks(t.toString(), tasks.size());
+            ui.tasks(t.toString(), tasks.size());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -247,7 +253,7 @@ public class Duke {
             if (num > tasks.size()) {
                 throw new ListOutOfBound(num);
             }
-            display.delete(tasks.get(num - 1), tasks.size() - 1);
+            ui.delete(tasks.get(num - 1), tasks.size() - 1);
             tasks.remove(num - 1);
             deleteLineInFile(path, num-1);
 
@@ -299,5 +305,4 @@ public class Duke {
             }
         }
     }
-
 }
