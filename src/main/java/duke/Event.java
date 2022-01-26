@@ -1,6 +1,4 @@
 package duke;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Event class represents an event task.
@@ -9,21 +7,28 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /**
-     * Store date of an event
+     * Store date of an event.
      */
     protected String at;
 
     /**
-     * Constructor for Event
+     * Constructor for Event.
      *
-     * @param description a description of the deadline task
-     * @param at          a event date
+     * @param description the description of the deadline task
+     * @param at          the event date
      */
     public Event(String description, String at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description description of the deadline task
+     * @param at          event date
+     * @param isDone      completion of the task
+     */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = at;
@@ -32,15 +37,20 @@ public class Event extends Task {
     /**
      * toString method for Event.
      *
-     * @return type of the task (event) marked by E and the description of the task followed by the date
+     * @return String representation of Event
      */
     @Override
-     public String toString()  {
+    public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
+    /**
+     * format Event to be stored into txt file.
+     *
+     * @return String representation of Event for txt file
+     */
     public String format() {
-        return "E|" + super.format() +"|" +at;
+        return "E|" + super.format() + "|" + at;
     }
 
 

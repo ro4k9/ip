@@ -1,6 +1,7 @@
 package duke;
+
 /**
- * A class for displaying
+ * A class for displaying Duke functionality.
  *
  * @author Rosa Kang
  */
@@ -16,15 +17,14 @@ public class Ui {
     protected TaskList tasks;
 
     /**
-     * Constructor for Display
-     *
+     * Constructor for Ui.
      */
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * A method to display greeting message
+     * A method to display greeting message.
      */
     public void greeting() {
         System.out.println(" n____n");
@@ -35,7 +35,7 @@ public class Ui {
     }
 
     /**
-     * A method to display the list
+     * A method to display the list.
      */
     public void lists() {
         System.out.println("  n____n");
@@ -45,14 +45,14 @@ public class Ui {
 
         for (int i = 0; i < tasks.size(); i++) {
             // System.out.println("    " + (i+1) + "." + taskLine(lst.get(i)));
-             System.out.println("    " + (i+1) + "." + tasks.get(i));
+            System.out.println("    " + (i + 1) + "." + tasks.get(i));
         }
 
         System.out.println(line);
     }
 
     /**
-     * A method to display farewell
+     * A method to display farewell.
      */
     public void farewell() {
         System.out.println("   n____n");
@@ -63,7 +63,7 @@ public class Ui {
     }
 
     /**
-     * A method to display a task that has been marked
+     * A method to display a task that has been marked.
      */
     public void mark(String taskName) {
         System.out.println("   n____n");
@@ -75,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * A method to display a task that has been unmarked
+     * A method to display a task that has been unmarked.
      */
     public void unmark(String taskName) {
         System.out.println("   n____n");
@@ -87,7 +87,7 @@ public class Ui {
     }
 
     /**
-     * A method to display tasks that has been added
+     * A method to display tasks that has been added.
      */
     public void tasks(String taskName, int total) {
         System.out.println("   n____n");
@@ -100,7 +100,7 @@ public class Ui {
     }
 
     /**
-     * A method to display deleted task
+     * A method to display deleted task.
      */
     public void delete(Task t, int total) {
         System.out.println("   n____n");

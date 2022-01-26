@@ -1,6 +1,4 @@
 package duke;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Deadline class represents the task with a deadline
@@ -9,12 +7,12 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     /**
-     * Store deadline of a task
+     * Store deadline of the task.
      */
     protected String by;
 
     /**
-     * Constructor for Deadline
+     * Constructor for Deadline.
      *
      * @param description a description of the deadline task
      * @param by          a deadline date
@@ -24,6 +22,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description description of the deadline task
+     * @param by          deadline date
+     * @param isDone      completion of the task
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = by;
@@ -32,14 +37,19 @@ public class Deadline extends Task {
     /**
      * toString method for Deadline.
      *
-     * @return type of the task (deadline) marked by D and the description of the task followed by the date
+     * @return String representation of Deadline
      */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
-     public String format() {
+    /**
+     * format Deadline to be stored into txt file.
+     *
+     * @return String representation of Deadline for txt file
+     */
+    public String format() {
         return "D|" + super.format() + "|" + by;
     }
 }

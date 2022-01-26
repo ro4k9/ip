@@ -1,4 +1,5 @@
 package duke;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task
+     *
+     * @param description a description of the deadline task
+     * @param isDone      completion status
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -58,7 +65,6 @@ public class Task {
     }
 
 
-
     /**
      * toString method of the task
      *
@@ -69,7 +75,12 @@ public class Task {
         return getStatusIcon() + description;
     }
 
+    /**
+     * format Task to be stored into txt file.
+     *
+     * @return String representation of Task for txt file
+     */
     public String format() {
-        return (isDone? "1|" : "0|") + description;
+        return (isDone ? "1|" : "0|") + description;
     }
 }

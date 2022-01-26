@@ -1,16 +1,8 @@
 package duke;
+
 import java.util.Scanner;
 import java.io.IOException;
 
-/*
-* TODO: Ui: deals with interactions with the user v 
-* TODO: Storage: deals with loading tasks from the file and saving tasks in the file v
-* TODO: Parser: deals with making sense of the user command
-* TODO: TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
-*
-*
-*
-* */
 /**
  * Duke class provides the functionality for Duke chatbot.
  *
@@ -25,11 +17,14 @@ public class Duke {
     protected Parser p;
     protected TaskList tasks;
 
+    /**
+     * Constructor for Duke
+     */
     public Duke() {
         tasks = new TaskList();
-       ui = new Ui(tasks);
-       s= new Storage("data/duke.txt", tasks);
-       p = new Parser();
+        ui = new Ui(tasks);
+        s = new Storage("data/duke.txt", tasks);
+        p = new Parser();
 
     }
 
@@ -40,7 +35,7 @@ public class Duke {
     /**
      * Execute the command corresponding to the user input
      */
-    public void run() throws IOException{
+    public void run() throws IOException {
         s.loadTextFile();
         s.load();
         ui.greeting();
@@ -82,12 +77,15 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to display a list of task.
+     */
     public void showList() { //throws IOException {
         ui.lists();
     }
 
     /**
-     * A method to mark the task complete
+     * A method to mark the task complete.
      *
      * @param cmd An array of String containing the user input split by whitespace
      */
@@ -100,9 +98,11 @@ public class Duke {
             if (num > tasks.size()) {
                 throw new ListOutOfBound(num);
             }
-            tasks.get(num - 1).markAsDone();
-            s.changeMarkInFile(num-1, true);
-            ui.mark(tasks.get(num-1).toString());//tasks.get(num - 1).toString());
+
+            tasks.mark(num - 1);
+
+            s.changeMarkInFile(num - 1, true);
+            ui.mark(tasks.get(num - 1).toString());//tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
@@ -114,7 +114,7 @@ public class Duke {
     }
 
     /**
-     * A method to unmark the task that had been marked complete
+     * A method to mark the task that incomplete.
      *
      * @param cmd An array of String containing the user input split by whitespace
      */
@@ -127,9 +127,9 @@ public class Duke {
             if (num > tasks.size()) {
                 throw new ListOutOfBound(num);
             }
-            tasks.get(num - 1).markAsNotDone();
+            tasks.unmark(num - 1);
             // change status in txt file
-            s.changeMarkInFile(num-1, false);
+            s.changeMarkInFile(num - 1, false);
             ui.unmark(tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
@@ -141,9 +141,9 @@ public class Duke {
     }
 
     /**
-     * A method to add  a new todo into tasks list
+     * A method to add a new todo into tasks list.
      *
-     * @param cmd An array of String containing the user input split by whitespace
+     * @param cmd An array of String containing the user input
      */
     public void addTodo(String[] cmd) {
         try {
@@ -157,15 +157,15 @@ public class Duke {
             s.appendToFile(t.format());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * A method to add  a new event into tasks list
+     * A method to add a new event into tasks list.
      *
-     * @param cmd An array of String containing the user input split by whitespace
+     * @param cmd An array of String containing the user input
      */
     public void addEvent(String[] cmd) {
         try {
@@ -190,9 +190,9 @@ public class Duke {
     }
 
     /**
-     * A method to add  a new deadline into tasks list
+     * A method to add a new deadline into tasks list.
      *
-     * @param cmd An array of String containing the user input split by whitespace
+     * @param cmd An array of String containing the user input
      */
     public void addDeadline(String[] cmd) {
         try {
@@ -218,11 +218,11 @@ public class Duke {
     }
 
     /**
-     * A method to delete an existing task in tasks list
+     * A method to delete an existing task in tasks list.
      *
-     * @param cmd An array of String containing the user input split by whitespace
+     * @param cmd An array of String containing the user input
      */
-    public void deleteTask(String[] cmd) throws IOException{
+    public void deleteTask(String[] cmd) throws IOException {
         try {
             if (cmd.length < 2) {
                 throw new EmptyDescriptionException(cmd[0]);
@@ -234,7 +234,7 @@ public class Duke {
             }
             ui.delete(tasks.get(num - 1), tasks.size() - 1);
             tasks.remove(num - 1);
-            s.deleteLineInFile(num-1);
+            s.deleteLineInFile(num - 1);
 
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
