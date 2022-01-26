@@ -43,7 +43,7 @@ public class Event extends Task {
             LocalDate date = LocalDate.parse(at, format);
             at = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at:" + at + ")";
     }
 
     public String format() {

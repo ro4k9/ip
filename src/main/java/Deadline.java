@@ -40,7 +40,7 @@ public class Deadline extends Task {
             LocalDate date = LocalDate.parse(by, format);
             by = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by:" + by + ")";
     }
 
      public String format() {

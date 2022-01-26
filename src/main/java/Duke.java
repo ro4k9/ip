@@ -1,16 +1,11 @@
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /*
 * TODO: Ui: deals with interactions with the user v 
-* TODO: Storage: deals with loading tasks from the file and saving tasks in the file
+* TODO: Storage: deals with loading tasks from the file and saving tasks in the file v
 * TODO: Parser: deals with making sense of the user command
 * TODO: TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
 *
@@ -32,13 +27,15 @@ public class Duke {
      * For the display of the text on the console.
      */
     protected Ui ui;
-    protected File f;
-    protected String path;
+    protected Storage s;
+    // protected File f;
+    // protected String path;
 
     public Duke() {
        // texts = new ArrayList<>();
        tasks = new ArrayList<>();
        ui = new Ui(tasks);
+       s= new Storage("data/duke.txt", tasks);
     }
 
     public static void main(String[] args) throws IOException {
@@ -49,21 +46,8 @@ public class Duke {
      * Execute the command corresponding to the user input
      */
     public void run() throws IOException{
-        path = "data/duke.txt";
-        f = new File(path);
-        f.getParentFile().mkdirs();
-
-        try {
-            if (!f.exists()) {
-                f.createNewFile();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // TODO: Load up tasks from harddisk
-
-        // texts = Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
-        load(path);
+        s.loadTextFile();
+        s.load();
         ui.greeting();
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
@@ -102,9 +86,8 @@ public class Duke {
         }
     }
 
-    public void showList() throws IOException {
-        List<String> texts =  Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
-        ui.lists(texts);
+    public void showList() { //throws IOException {
+        ui.lists();
     }
 
     /**
@@ -122,7 +105,7 @@ public class Duke {
                 throw new ListOutOfBound(num);
             }
             tasks.get(num - 1).markAsDone();
-            changeMarkInFile(path, num-1, true);
+            s.changeMarkInFile(num-1, true);
             ui.mark(tasks.get(num-1).toString());//tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
@@ -150,7 +133,7 @@ public class Duke {
             }
             tasks.get(num - 1).markAsNotDone();
             // change status in txt file
-            changeMarkInFile(path, num-1, false);
+            s.changeMarkInFile(num-1, false);
             ui.unmark(tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
@@ -175,7 +158,7 @@ public class Duke {
             t = new Todo(cmd[1]);
             tasks.add(t);
             ui.tasks(t.toString(), tasks.size());
-            appendToFile(path, t.format());
+            s.appendToFile(t.format());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch(IOException e) {
@@ -201,7 +184,7 @@ public class Duke {
             } else t = new Event(temp[0], temp[1]);
 
             tasks.add(t);
-            appendToFile(path, t.format());
+            s.appendToFile(t.format());
             ui.tasks(t.toString(), tasks.size());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
@@ -229,7 +212,7 @@ public class Duke {
                 t = new Deadline(temp[0], temp[1]);
             }
             tasks.add(t);
-            appendToFile(path, t.format());
+            s.appendToFile(t.format());
             ui.tasks(t.toString(), tasks.size());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
@@ -255,54 +238,12 @@ public class Duke {
             }
             ui.delete(tasks.get(num - 1), tasks.size() - 1);
             tasks.remove(num - 1);
-            deleteLineInFile(path, num-1);
+            s.deleteLineInFile(num-1);
 
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("The second argument of the " + cmd[0] + " must be an integer.");
-        }
-    }
-
-    private void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend+ "\n");
-        fw.close();
-    }
-
-    private void changeMarkInFile(String filePath, int n, boolean isDone) throws IOException{
-        List<String> texts =  Files.readAllLines(Paths.get(filePath), StandardCharsets.US_ASCII);
-        String temp = texts.get(n);
-        String[] arr = temp.split("\\|");
-        // String data = temp.replace(temp.substring(2,3), (isDone? "1":"0"));
-        if(arr.length >3) {
-            texts.set(n, arr[0] + (isDone ? "|1" : "|0") + "|"+ arr[2] +"|"+ arr[3]);
-        } else {
-            texts.set(n, arr[0] + (isDone ? "|1" : "|0") +"|"+ arr[2]);
-        }
-        Files.write(Paths.get(filePath), texts, StandardCharsets.US_ASCII);
-    }
-
-
-    private void deleteLineInFile(String filePath, int n) throws IOException{
-        List<String> texts =  Files.readAllLines(Paths.get(filePath), StandardCharsets.US_ASCII);
-        texts.remove(n);
-        Files.write(Paths.get(filePath), texts, StandardCharsets.US_ASCII);
-    }
-
-
-    private void load(String filePath) throws IOException{
-        List<String> texts =  Files.readAllLines(Paths.get(filePath), StandardCharsets.US_ASCII);
-        for(int i =0; i < texts.size(); i++) {
-            String[] input = texts.get(i).split("\\|");
-            boolean isDone = input[1].equals("1");
-            if(input[0].equals("T")) {
-                tasks.add(new Todo(input[2], isDone));
-            } else  if(input[0].equals("E")) {
-                tasks.add(new Event(input[2], input[3], isDone));
-            } else {
-                tasks.add(new Deadline(input[2], input[3], isDone));
-            }
         }
     }
 }
