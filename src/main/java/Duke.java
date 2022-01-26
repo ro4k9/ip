@@ -21,23 +21,23 @@ public class Duke {
     /**
      * Represents the list of tasks added by the user.
      */
-    protected List<Task> tasks;
-   // protected List<String> texts;
+    // protected List<Task> tasks;
     /**
      * For the display of the text on the console.
      */
     protected Ui ui;
     protected Storage s;
     protected Parser p;
-    // protected File f;
-    // protected String path;
+    protected TaskList tasks;
 
     public Duke() {
        // texts = new ArrayList<>();
-       tasks = new ArrayList<>();
+       // tasks = new ArrayList<>();
+        tasks = new TaskList();
        ui = new Ui(tasks);
        s= new Storage("data/duke.txt", tasks);
        p = new Parser();
+
     }
 
     public static void main(String[] args) throws IOException {

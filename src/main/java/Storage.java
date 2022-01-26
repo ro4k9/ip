@@ -9,9 +9,10 @@ import java.util.List;
 public class Storage {
     protected String path;
     protected File f;
-    protected List<Task> tasks;
+    //protected List<Task> tasks;
+    protected TaskList tasks;
 
-    public Storage(String path, List<Task> tasks) {
+    public Storage(String path, TaskList tasks) {
         this.tasks = tasks;
         this.path = path;
     }
