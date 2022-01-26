@@ -1,6 +1,9 @@
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +32,7 @@ public class Duke {
     public Duke() {
        // texts = new ArrayList<>();
        tasks = new ArrayList<>();
-       display = new Display();
+       display = new Display(tasks);
     }
 
     public static void main(String[] args) throws IOException {
@@ -94,8 +97,8 @@ public class Duke {
     }
 
     public void showList() throws IOException {
-        List<String> texts =  Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
-        display.lists(texts);
+        //List<String> texts =  Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
+        display.lists();//tasks);
     }
 
     /**
@@ -185,7 +188,7 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             Event t;
-            String[] temp = cmd[1].split(" /at", 2);
+            String[] temp = cmd[1].split(" /at ", 2);
 
             if (temp.length < 2) {
                 t = new Event(temp[0], " nil");
@@ -212,7 +215,7 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             Deadline t;
-            String[] temp = cmd[1].split(" /by", 2);
+            String[] temp = cmd[1].split(" /by ", 2);
 
             if (temp.length < 2) {
                 t = new Deadline(temp[0], " nil");
@@ -296,4 +299,5 @@ public class Duke {
             }
         }
     }
+
 }

@@ -14,14 +14,14 @@ public class Display {
     private static final String farewellMsg = "~*~*Cya soon*~*~!";
     private static final String addTaskMsg = "Gotcha~ I've added this task:";
     private static final String deleteTaskMsg = "Noted~ I've removed this task:";
-    //protected List<Task> tasks;
+    protected List<Task> tasks;
 
     /**
      * Constructor for Display
      *
      */
-    Display() {
-        //this.tasks = tasks;
+    Display(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -38,15 +38,15 @@ public class Display {
     /**
      * A method to display the list
      */
-    public void lists(List<String> lst) {
+    public void lists() {//List<String> lst) {
         System.out.println("  n____n");
         System.out.println(" ( o v o )");
         System.out.println("--u-----u---------------------------------");
         System.out.println(listMsg);
 
-        for (int i = 0; i < lst.size(); i++) {
-            System.out.println("    " + (i+1) + "." + taskLine(lst.get(i)));
-            // System.out.println("    " + i + "." + tasks.get(i - 1));
+        for (int i = 0; i < tasks.size(); i++) {
+            // System.out.println("    " + (i+1) + "." + taskLine(lst.get(i)));
+            System.out.println("    " + (i+1) + "." + tasks.get(i));
         }
 
         System.out.println(line);

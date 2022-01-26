@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline class represents the task with a deadline
  *
@@ -32,7 +35,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
+        if(isValidDate(by)) {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(by, format);
+            by = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
      public String format() {

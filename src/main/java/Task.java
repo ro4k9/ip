@@ -1,3 +1,7 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * A class representing and holding functionality of task
  *
@@ -52,6 +56,17 @@ public class Task {
         isDone = false;
     }
 
+    public boolean isValidDate(String date) {
+        try {
+            DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+            format.setLenient(false);
+            format.parse(date);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
     /**
      * toString method of the task
      *
@@ -62,7 +77,7 @@ public class Task {
         return getStatusIcon() + description;
     }
 
-     public String format() {
+    public String format() {
         return (isDone? "1|" : "0|") + description;
     }
 }

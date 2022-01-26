@@ -1,3 +1,9 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Event class represents an event task.
  *
@@ -25,18 +31,24 @@ public class Event extends Task {
         this.at = at;
     }
 
-
     /**
      * toString method for Event.
      *
      * @return type of the task (event) marked by E and the description of the task followed by the date
      */
     @Override
-     public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
+     public String toString()  {
+        if(isValidDate(at)) {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(at, format);
+            at = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     public String format() {
         return "E|" + super.format() +"|" +at;
     }
+
+
 }
