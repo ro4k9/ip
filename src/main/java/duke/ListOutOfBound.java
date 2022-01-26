@@ -1,3 +1,4 @@
+package duke;
 /**
  * ListOutOfBOund is a class for handling exception when user selected a task that
  * is out of bound from the current list

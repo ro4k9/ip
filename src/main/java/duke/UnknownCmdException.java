@@ -1,3 +1,4 @@
+package duke;
 /**
  * EmptyDescriptionException is a class for handling unknown commands
  *

@@ -1,3 +1,4 @@
+package duke;
 public class Parser {
     public String[] parseCommand(String input) {
         return input.split(" ", 2);

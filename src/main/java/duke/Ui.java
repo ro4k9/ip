@@ -1,4 +1,4 @@
-
+package duke;
 /**
  * A class for displaying
  *
@@ -111,35 +111,4 @@ public class Ui {
         System.out.println("Now you have " + total + " task in the list.");
         System.out.println(line);
     }
-
-    /* public String taskLine(String data) {
-        String[] input = data.split("\\|",4);
-        String temp;
-        temp ="";
-
-        if(input[0].equals("T")) {
-          temp += "[T]";
-        } else  if(input[0].equals("E")) {
-            temp+= "[E]";
-        } else {
-            temp+= "[D]";
-        }
-
-        if(input[1].equals("1")) {
-            temp +="[X] ";
-        } else {
-            temp+="[ ] ";
-        }
-
-        temp += input[2];
-
-
-        if(input[0].equals("D")) {
-            temp += " (by:" + input[3] + ")";
-        } else if(input[0].equals("E")) {
-            temp+= " (at:" + input[3] + ")";
-        }
-
-        return temp;
-    }*/
 }

@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+package duke;
+
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -19,10 +19,6 @@ import java.io.IOException;
  */
 public class Duke {
     /**
-     * Represents the list of tasks added by the user.
-     */
-    // protected List<Task> tasks;
-    /**
      * For the display of the text on the console.
      */
     protected Ui ui;
@@ -31,8 +27,6 @@ public class Duke {
     protected TaskList tasks;
 
     public Duke() {
-       // texts = new ArrayList<>();
-       // tasks = new ArrayList<>();
         tasks = new TaskList();
        ui = new Ui(tasks);
        s= new Storage("data/duke.txt", tasks);

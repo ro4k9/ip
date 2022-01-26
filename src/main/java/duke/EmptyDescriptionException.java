@@ -1,3 +1,4 @@
+package duke;
 /**
  * EmptyDescriptionException is a class for handling exception where there is
  * no user input or the field required by the command is empty.
