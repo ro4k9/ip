@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.List;
+
 /**
  * A class for displaying Duke functionality.
  *
@@ -9,11 +11,12 @@ public class Ui {
     private static final String LINE = "------------------------------------------";
     private static final String GREETING_MSG = "-> Hi I'm Duke~\n-> What can I do for you?";
     private static final String LIST_MSG = "-> Here are the tasks in your list:";
-    private static final String MARK_MSG = "Nice~ I've marked this task as *done*:";
-    private static final String UNMARK_MSG = "Okie~ I've marked this task as *not done* yet:";
-    private static final String FAREWELL_MSG = "~*~*Cya soon*~*~!";
-    private static final String ADD_MSG = "Gotcha~ I've added this task:";
-    private static final String DELETE_MSG = "Noted~ I've removed this task:";
+    private static final String MARK_MSG = "-> Nice~ I've marked this task as *done*:";
+    private static final String UNMARK_MSG = "-> Okie~ I've marked this task as *not done* yet:";
+    private static final String FAREWELL_MSG = "-> ~*~*Cya soon*~*~!";
+    private static final String ADD_MSG = "-> Gotcha~ I've added this task:";
+    private static final String DELETE_MSG = "-> Noted~ I've removed this task:";
+    private static final String MATCH_MSG = "-> Here are the matching tasks in your list:\n";
     protected TaskList tasks;
 
     /**
@@ -43,9 +46,8 @@ public class Ui {
         System.out.println("--u-----u---------------------------------");
         System.out.println(LIST_MSG);
 
-        for (int i = 0; i < tasks.size(); i++) {
-            // System.out.println("    " + (i+1) + "." + taskLine(lst.get(i)));
-            System.out.println("    " + (i + 1) + "." + tasks.get(i));
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.println("    " + (i + 1) + "." + tasks.getTask(i));
         }
 
         System.out.println(LINE);
@@ -111,4 +113,18 @@ public class Ui {
         System.out.println("Now you have " + total + " task in the list.");
         System.out.println(LINE);
     }
+
+    public void matchLists(List<Task> lst) {
+        System.out.println("  n____n");
+        System.out.println(" ( o v o )");
+        System.out.println("--u-----u---------------------------------");
+        System.out.println(MATCH_MSG);
+
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println("    " + (i + 1) + "." + lst.get(i));
+        }
+
+        System.out.println(LINE);
+    }
+
 }

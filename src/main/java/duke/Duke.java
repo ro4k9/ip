@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -15,6 +16,7 @@ public class Duke {
     protected Ui ui;
     protected Storage s;
     protected Parser p;
+
     protected TaskList tasks;
 
     /**
@@ -25,6 +27,7 @@ public class Duke {
         ui = new Ui(tasks);
         s = new Storage("data/duke.txt", tasks);
         p = new Parser();
+
 
     }
 
@@ -67,6 +70,8 @@ public class Duke {
                     addDeadline(cmd);
                 } else if (cmd[0].equals("delete")) {
                     deleteTask(cmd);
+                } else if(cmd[0].equals("find")) {
+                    findTask(cmd);
                 } else {
                     throw new UnknownCmdException();
                 }
@@ -83,6 +88,7 @@ public class Duke {
     public void showList() { //throws IOException {
         ui.lists();
     }
+
 
     /**
      * A method to mark the task complete.
@@ -240,6 +246,18 @@ public class Duke {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("The second argument of the " + cmd[0] + " must be an integer.");
+        }
+    }
+
+    public void findTask(String[] cmd) {
+        try {
+            if (cmd.length < 2) {
+                throw new EmptyDescriptionException(cmd[0]);
+            }
+            List<Task> lst = tasks.findMatchingTask(cmd[1]);
+            ui.matchLists(lst);
+        } catch (EmptyDescriptionException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

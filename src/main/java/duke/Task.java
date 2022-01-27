@@ -60,6 +60,10 @@ public class Task {
         isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
 
     /**
      * toString method of the task
