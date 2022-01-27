@@ -68,7 +68,7 @@ public class TaskList {
 
     public List<Task> findMatchingTask(String term) {
         List<Task> matching = new ArrayList<Task>();
-        for(Task t: tasks) {
+        for (Task t : tasks) {
             if (t.getDescription().contains(term)) {
                 matching.add(t);
             }

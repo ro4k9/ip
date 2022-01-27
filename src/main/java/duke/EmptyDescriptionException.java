@@ -20,6 +20,6 @@ public class EmptyDescriptionException extends Exception {
      * @param field that is required by the command
      */
     public EmptyDescriptionException(String field) {
-        super("OOPS!!! The description of a " + field + " cannot be empty.");
+        super("OOPS!!! The description of " + field + " cannot be empty.");
     }
 }

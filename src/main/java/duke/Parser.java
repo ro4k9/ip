@@ -12,13 +12,22 @@ import java.time.format.DateTimeFormatter;
  * @author Rosa Kang
  */
 public class Parser {
+    public static Command parser(String cmd) {
+        String[] cmdArr = parseCommand(cmd);
+        if (cmdArr.length < 2) {
+            return new Command(cmdArr[0]);
+        } else {
+            return new Command(cmdArr[0], cmdArr[1]);
+        }
+    }
+
     /**
      * Parse a line of command into Duke command and user inputs following the command.
      *
      * @param input a line of user input
      * @return an array of string containing command and the remaining user inputs
      */
-    public String[] parseCommand(String input) {
+    public static String[] parseCommand(String input) {
         return input.split(" ", 2);
     }
 
@@ -28,7 +37,7 @@ public class Parser {
      * @param input a line of String containing task description and date
      * @return an array of string containing description and date information
      */
-    public String[] parseDateAt(String input) {
+    public static String[] parseDateAt(String input) {
         return input.split(" /at ", 2);
     }
 
@@ -38,7 +47,7 @@ public class Parser {
      * @param input a line of String containing task description and date
      * @return an array of string containing description and date information
      */
-    public String[] parseDateBy(String input) {
+    public static String[] parseDateBy(String input) {
         return input.split(" /by ", 2);
     }
 
@@ -49,7 +58,7 @@ public class Parser {
      * @param date String date input
      * @return an array of string containing description and date information.
      */
-    public boolean isValidDate(String date) {
+    public static boolean isValidDate(String date) {
         try {
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             format.setLenient(true);
@@ -67,7 +76,7 @@ public class Parser {
      * @param input String date input
      * @return reformatted String if the input is in valid date format else input
      */
-    public String convertDate(String input) {
+    public static String convertDate(String input) {
         if (isValidDate(input)) {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate date = LocalDate.parse(input, format);

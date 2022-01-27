@@ -26,6 +26,7 @@ public class Ui {
         this.tasks = tasks;
     }
 
+
     /**
      * A method to display greeting message.
      */
@@ -126,5 +127,4 @@ public class Ui {
 
         System.out.println(LINE);
     }
-
 }
