@@ -18,5 +18,7 @@ public class DukeTest {
         assertEquals("Oct 25 2012", p.convertDate("2012-10-25"));
         assertEquals("May 03 2012", p.convertDate("2012-05-03"));
         assertEquals("Jun 25 2012", p.convertDate("2012-06-25"));
+        assertEquals("testdate", p.convertDate("testdate"));
     }
+
 }
