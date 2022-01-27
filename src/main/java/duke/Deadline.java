@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Deadline class represents the task with a deadline
+ * Deadline class represents the task with a deadline.
  *
  * @author Rosa Kang
  */

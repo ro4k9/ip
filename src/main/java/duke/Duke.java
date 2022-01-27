@@ -18,7 +18,7 @@ public class Duke {
     protected TaskList tasks;
 
     /**
-     * Constructor for Duke
+     * Constructor for Duke.
      */
     public Duke() {
         tasks = new TaskList();
@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * Execute the command corresponding to the user input
+     * Execute the command corresponding to the user input.
      */
     public void run() throws IOException {
         s.loadTextFile();
