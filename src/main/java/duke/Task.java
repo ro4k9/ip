@@ -1,9 +1,5 @@
 package duke;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 /**
  * A class representing and holding functionality of task
  *

@@ -95,14 +95,14 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             int num = Integer.parseInt(cmd[1]);
-            if (num > tasks.size()) {
+            if (num > tasks.getSize()) {
                 throw new ListOutOfBound(num);
             }
 
-            tasks.mark(num - 1);
+            tasks.markTask(num - 1);
 
             s.changeMarkInFile(num - 1, true);
-            ui.mark(tasks.get(num - 1).toString());//tasks.get(num - 1).toString());
+            ui.mark(tasks.getTask(num - 1).toString());//tasks.get(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
@@ -124,13 +124,13 @@ public class Duke {
                 throw new EmptyDescriptionException(cmd[0]);
             }
             int num = Integer.parseInt(cmd[1]);
-            if (num > tasks.size()) {
+            if (num > tasks.getSize()) {
                 throw new ListOutOfBound(num);
             }
-            tasks.unmark(num - 1);
+            tasks.unmarkTask(num - 1);
             // change status in txt file
             s.changeMarkInFile(num - 1, false);
-            ui.unmark(tasks.get(num - 1).toString());
+            ui.unmark(tasks.getTask(num - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
@@ -152,8 +152,8 @@ public class Duke {
             }
             Todo t;
             t = new Todo(cmd[1]);
-            tasks.add(t);
-            ui.tasks(t.toString(), tasks.size());
+            tasks.addTask(t);
+            ui.tasks(t.toString(), tasks.getSize());
             s.appendToFile(t.format());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
@@ -179,9 +179,9 @@ public class Duke {
                 t = new Event(temp[0], " nil");
             } else t = new Event(temp[0], p.convertDate(temp[1]));
 
-            tasks.add(t);
+            tasks.addTask(t);
             s.appendToFile(t.format());
-            ui.tasks(t.toString(), tasks.size());
+            ui.tasks(t.toString(), tasks.getSize());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -207,9 +207,9 @@ public class Duke {
             } else {
                 t = new Deadline(temp[0], p.convertDate(temp[1]));
             }
-            tasks.add(t);
+            tasks.addTask(t);
             s.appendToFile(t.format());
-            ui.tasks(t.toString(), tasks.size());
+            ui.tasks(t.toString(), tasks.getSize());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -229,11 +229,11 @@ public class Duke {
             }
             int num = Integer.parseInt(cmd[1]);
 
-            if (num > tasks.size()) {
+            if (num > tasks.getSize()) {
                 throw new ListOutOfBound(num);
             }
-            ui.delete(tasks.get(num - 1), tasks.size() - 1);
-            tasks.remove(num - 1);
+            ui.delete(tasks.getTask(num - 1), tasks.getSize() - 1);
+            tasks.removeTask(num - 1);
             s.deleteLineInFile(num - 1);
 
         } catch (ListOutOfBound | EmptyDescriptionException e) {

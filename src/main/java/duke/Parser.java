@@ -25,7 +25,7 @@ public class Parser {
     /**
      * Parse a user input for command 'event' into description and date information.
      *
-     * @param input a line of String containing task description and date)
+     * @param input a line of String containing task description and date
      * @return an array of string containing description and date information
      */
     public String[] parseDateAt(String input) {
@@ -35,7 +35,7 @@ public class Parser {
     /**
      * Parse a user input for command 'deadline' into description and date information.
      *
-     * @param input a line of String cotaining task description and date
+     * @param input a line of String containing task description and date
      * @return an array of string containing description and date information
      */
     public String[] parseDateBy(String input) {

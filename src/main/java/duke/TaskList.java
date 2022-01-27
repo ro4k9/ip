@@ -16,7 +16,7 @@ public class TaskList {
      *
      * @return size of the TaskList
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
@@ -26,7 +26,7 @@ public class TaskList {
      * @param index the index of Task object in the list
      * @return Task object located at index of the list.
      */
-    public Task get(int index) {
+    public Task getTask(int index) {
         return tasks.get(index);
     }
 
@@ -35,7 +35,7 @@ public class TaskList {
      *
      * @param t the task to end to the list
      */
-    public void add(Task t) {
+    public void addTask(Task t) {
         tasks.add(t);
     }
 
@@ -44,16 +44,16 @@ public class TaskList {
      *
      * @param index the index of TaskList containing the task to be deleted
      */
-    public void remove(int index) {
+    public void removeTask(int index) {
         tasks.remove(index);
     }
 
     /**
-     * The method marks task at i as complete.
+     * The method marks task at index i as complete.
      *
      * @param i the index of TaskList containing the task that needs to be edited (completion status)
      */
-    public void mark(int i) {
+    public void markTask(int i) {
         tasks.get(i - 1).markAsDone();
     }
 
@@ -62,7 +62,7 @@ public class TaskList {
      *
      * @param i the index of TaskList containing the task that needs to be edited (completion status)
      */
-    public void unmark(int i) {
+    public void unmarkTask(int i) {
         tasks.get(i - 1).markAsNotDone();
     }
 

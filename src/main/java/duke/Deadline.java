@@ -35,6 +35,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * format Deadline to be stored into txt file.
+     *
+     * @return String representation of Deadline for txt file
+     */
+    public String format() {
+        return "D|" + super.format() + "|" + by;
+    }
+
+    /**
      * toString method for Deadline.
      *
      * @return String representation of Deadline
@@ -42,14 +51,5 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
-    }
-
-    /**
-     * format Deadline to be stored into txt file.
-     *
-     * @return String representation of Deadline for txt file
-     */
-    public String format() {
-        return "D|" + super.format() + "|" + by;
     }
 }

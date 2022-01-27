@@ -58,11 +58,11 @@ public class Storage {
             String[] input = texts.get(i).split("\\|");
             boolean isDone = input[1].equals("1");
             if (input[0].equals("T")) {
-                tasks.add(new Todo(input[2], isDone));
+                tasks.addTask(new Todo(input[2], isDone));
             } else if (input[0].equals("E")) {
-                tasks.add(new Event(input[2], input[3], isDone));
+                tasks.addTask(new Event(input[2], input[3], isDone));
             } else {
-                tasks.add(new Deadline(input[2], input[3], isDone));
+                tasks.addTask(new Deadline(input[2], input[3], isDone));
             }
         }
     }
