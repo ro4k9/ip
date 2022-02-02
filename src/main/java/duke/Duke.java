@@ -23,7 +23,7 @@ public class Duke {
         tasks = new TaskList();
         ui = new Ui(tasks);
         s = new Storage(path, tasks);
-        // p = new Parser();
+
     }
 
     public static void main(String[] args) throws IOException {
