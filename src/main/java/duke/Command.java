@@ -8,16 +8,37 @@ public class Command {
     protected String secondArg;
     protected boolean isExit = false;
 
-    public Command(String firstSeg) {
-        this.firstArg = firstSeg;
+    /**
+     * Constructor for Command
+     *
+     * @param firstArg first argument of the command
+     */
+    public Command(String firstArg) {
+        this.firstArg = firstArg;
     }
 
-    public Command(String firstSeg, String secondSeg) {
-        this.firstArg = firstSeg;
-        this.secondArg = secondSeg;
+    /**
+     * Constructor for Command
+     *
+     * @param firstArg first argument of the command
+     * @param secondArg second argument of the command
+     */
+    public Command(String firstArg, String secondArg) {
+        this.firstArg = firstArg;
+        this.secondArg = secondArg;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage s) throws EmptyDescriptionException, UnknownCmdException, IOException {
+    /**
+     *
+     * @param tasks list of task
+     * @param ui display functionality of duke
+     * @param s storage to deal with making changes to text file
+     * @throws EmptyDescriptionException
+     * @throws UnknownCmdException
+     * @throws IOException
+     */
+    public void execute(TaskList tasks, Ui ui, Storage s) throws
+            EmptyDescriptionException, UnknownCmdException, IOException {
         if (firstArg.isEmpty()) {
             throw new EmptyDescriptionException();
         }
@@ -71,6 +92,7 @@ public class Command {
             if (taskIndex == null) {
                 throw new EmptyDescriptionException("mark");
             }
+
             int i = Integer.parseInt(taskIndex);
             if (i > tasks.getSize()) {
                 throw new ListOutOfBound(i);
@@ -79,7 +101,7 @@ public class Command {
             tasks.markTask(i);
 
             s.changeMarkInFile(i - 1, true);
-            ui.mark(tasks.getTask(i - 1).toString());//tasks.get(num - 1).toString());
+            ui.mark(tasks.getTask(i - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
@@ -157,12 +179,15 @@ public class Command {
             if (taskDescription == null) {
                 throw new EmptyDescriptionException("event");
             }
+
             Event e;
             String[] temp = Parser.parseDateAt(taskDescription);
 
             if (temp.length < 2) {
                 throw new EmptyDescriptionException("time for command event");
-            } else e = new Event(temp[0], Parser.convertDate(temp[1]));
+            } else {
+                e = new Event(temp[0], Parser.convertDate(temp[1]));
+            }
             tasks.addTask(e);
             s.appendToFile(e.format());
             ui.tasks(e.toString(), tasks.getSize());

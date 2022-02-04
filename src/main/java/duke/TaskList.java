@@ -66,6 +66,12 @@ public class TaskList {
         tasks.get(i - 1).markAsNotDone();
     }
 
+    /**
+     * The method to find the task with matching term given by the user
+     *
+     * @param term search term in the list of task
+     * @return List of task containing the term
+     */
     public List<Task> findMatchingTask(String term) {
         List<Task> matching = new ArrayList<Task>();
         for (Task t : tasks) {

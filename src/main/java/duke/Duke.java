@@ -1,7 +1,7 @@
 package duke;
 
-import java.util.Scanner;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Duke class provides the functionality for Duke chatbot.

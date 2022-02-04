@@ -12,6 +12,12 @@ import java.time.format.DateTimeFormatter;
  * @author Rosa Kang
  */
 public class Parser {
+    /**
+    * Parse a line of command
+     *
+     * @param cmd a line of user input
+     * @return a Command object containing the user input
+    */
     public static Command parser(String cmd) {
         String[] cmdArr = parseCommand(cmd);
         if (cmdArr.length < 2) {

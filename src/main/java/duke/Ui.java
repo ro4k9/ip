@@ -115,6 +115,9 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+    * A method to display the list of tasks matching the term given by user.
+    */
     public void matchLists(List<Task> lst) {
         System.out.println("  n____n");
         System.out.println(" ( o v o )");
