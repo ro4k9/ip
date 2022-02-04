@@ -29,105 +29,84 @@ public class Ui {
 
     /**
      * A method to display greeting message.
+     *
+     * @return greeting message
      */
-    public void greeting() {
-        System.out.println(" n____n");
-        System.out.println("( o v o ) n");
-        System.out.println(LINE);
-        System.out.println(GREETING_MSG);
-        System.out.println(LINE);
+    public String greeting() {
+        return GREETING_MSG;
     }
 
     /**
      * A method to display the list.
+     *
+     * @return list of task
      */
-    public void lists() {
-        System.out.println("  n____n");
-        System.out.println(" ( o v o )");
-        System.out.println("--u-----u---------------------------------");
-        System.out.println(LIST_MSG);
-
+    public String lists() {
+        String list = LIST_MSG + "\n";
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println("    " + (i + 1) + "." + tasks.getTask(i));
+            list += "    " + (i + 1) + "." + tasks.getTask(i) + "\n";
         }
 
-        System.out.println(LINE);
+        return list;
     }
 
     /**
      * A method to display farewell.
+     *
+     * @return farewell message
      */
-    public void farewell() {
-        System.out.println("   n____n");
-        System.out.println("n ( o v o )");
-        System.out.println(LINE);
-        System.out.println(FAREWELL_MSG);
-        System.out.println(LINE);
+    public String farewell() {
+        return FAREWELL_MSG;
     }
 
     /**
      * A method to display a task that has been marked.
+     *
+     * @return task that has been marked
      */
-    public void mark(String taskName) {
-        System.out.println("   n____n");
-        System.out.println("  ( > v < )n");
-        System.out.println("---u--------------------------------------");
-        System.out.println(MARK_MSG);
-        System.out.println("    " + taskName);
-        System.out.println(LINE);
+    public String mark(String taskName) {
+        return MARK_MSG + "\n" + "    " + taskName;
     }
 
     /**
      * A method to display a task that has been unmarked.
+     *
+     * @return task that has been unmarked
      */
-    public void unmark(String taskName) {
-        System.out.println("   n____n");
-        System.out.println("  ( o _ o )");
-        System.out.println(LINE);
-        System.out.println(UNMARK_MSG);
-        System.out.println("    " + taskName);
-        System.out.println(LINE);
+    public String unmark(String taskName) {
+        return UNMARK_MSG + "\n" + "    " + taskName;
     }
 
     /**
      * A method to display tasks that has been added.
+     *
+     * @return task that has been added
      */
-    public void tasks(String taskName, int total) {
-        System.out.println("   n____n");
-        System.out.println("  ( ^ v ^ )");
-        System.out.println("---u-----u--------------------------------");
-        System.out.println(ADD_MSG);
-        System.out.println("    " + taskName);
-        System.out.println("Now you have " + total + " task in the list.");
-        System.out.println(LINE);
+    public String tasks(String taskName, int total) {
+        return ADD_MSG + "\n" + "    " + taskName + "\n" + "Now you have " + total + " task in the list.";
     }
 
     /**
      * A method to display deleted task.
+     *
+     * @return task that has been deleted
      */
-    public void delete(Task t, int total) {
-        System.out.println("   n____n");
-        System.out.println("  ( o n o )");
-        System.out.println(LINE);
-        System.out.println(DELETE_MSG);
-        System.out.println("    " + t);
-        System.out.println("Now you have " + total + " task in the list.");
-        System.out.println(LINE);
+    public String delete(Task t, int total) {
+        return DELETE_MSG + "\n" + "    " + t + "\n" + "Now you have " + total + " task in the list.";
     }
 
     /**
     * A method to display the list of tasks matching the term given by user.
+     *
+     * @return tasks that matches the term given by user
     */
-    public void matchLists(List<Task> lst) {
-        System.out.println("  n____n");
-        System.out.println(" ( o v o )");
-        System.out.println("--u-----u---------------------------------");
-        System.out.println(MATCH_MSG);
+    public String matchLists(List<Task> lst) {
 
+        String list = MATCH_MSG + "\n";
         for (int i = 0; i < lst.size(); i++) {
-            System.out.println("    " + (i + 1) + "." + lst.get(i));
+            list += "    " + (i + 1) + "." + lst.get(i) + "\n";
         }
 
-        System.out.println(LINE);
+        return list;
     }
 }
