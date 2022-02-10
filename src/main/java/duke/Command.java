@@ -41,10 +41,7 @@ public class Command {
             EmptyDescriptionException, UnknownCmdException, IOException {
         if (firstArg.isEmpty()) {
             throw new EmptyDescriptionException();
-        }
-        if (firstArg.equals("bye")) {
-            // ui.farewell();
-            isExit = true;
+        } else if (firstArg.equals("bye")) {
             return ui.farewell();
         } else if (firstArg.equals("list")) {
             return showList(ui);
@@ -92,14 +89,14 @@ public class Command {
             if (taskIndex == null) {
                 throw new EmptyDescriptionException("mark");
             }
+            assert taskIndex != null;
 
             int i = Integer.parseInt(taskIndex);
             if (i > tasks.getSize()) {
                 throw new ListOutOfBound(i);
             }
-
+            assert i <= tasks.getSize();
             tasks.markTask(i);
-
             s.changeMarkInFile(i - 1, true);
             return ui.mark(tasks.getTask(i - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
@@ -124,12 +121,14 @@ public class Command {
             if (taskIndex == null) {
                 throw new EmptyDescriptionException("mark");
             }
+            assert taskIndex != null;
+
             int i = Integer.parseInt(taskIndex);
             if (i > tasks.getSize()) {
                 throw new ListOutOfBound(i);
             }
+            assert i <= tasks.getSize();
             tasks.unmarkTask(i);
-            // change status in txt file
             s.changeMarkInFile(i - 1, false);
             return ui.unmark(tasks.getTask(i - 1).toString());
         } catch (ListOutOfBound | EmptyDescriptionException e) {
@@ -154,6 +153,7 @@ public class Command {
             if (taskDescription == null) {
                 throw new EmptyDescriptionException("todo");
             }
+            assert taskDescription != null;
             Todo t;
             t = new Todo(taskDescription);
             tasks.addTask(t);
@@ -179,15 +179,15 @@ public class Command {
             if (taskDescription == null) {
                 throw new EmptyDescriptionException("event");
             }
-
+            assert taskDescription != null;
             Event e;
             String[] temp = Parser.parseDateAt(taskDescription);
-
             if (temp.length < 2) {
                 throw new EmptyDescriptionException("time for command event");
             } else {
                 e = new Event(temp[0], Parser.convertDate(temp[1]));
             }
+            assert temp.length>=2;
             tasks.addTask(e);
             s.appendToFile(e.format());
             return ui.tasks(e.toString(), tasks.getSize());
@@ -211,14 +211,18 @@ public class Command {
             if (taskDescription == null) {
                 throw new EmptyDescriptionException("deadline");
             }
+            assert taskDescription != null;
+
             Deadline t;
             String[] temp = Parser.parseDateBy(taskDescription);
 
             if (temp.length < 2) {
-                t = new Deadline(temp[0], " nil");
+                throw new EmptyDescriptionException("time for command deadline");
             } else {
                 t = new Deadline(temp[0], Parser.convertDate(temp[1]));
             }
+            assert temp.length>=2;
+
             tasks.addTask(t);
             s.appendToFile(t.format());
             return ui.tasks(t.toString(), tasks.getSize());
@@ -242,16 +246,18 @@ public class Command {
             if (taskDescription == null) {
                 throw new EmptyDescriptionException("delete");
             }
-            int num = Integer.parseInt(taskDescription);
-
-            if (num > tasks.getSize()) {
-                throw new ListOutOfBound(num);
+            assert taskDescription != null;
+            int i = Integer.parseInt(taskDescription);
+            if (i > tasks.getSize()) {
+                throw new ListOutOfBound(i);
             }
-            Task taskToDelete = tasks.getTask(num - 1);
+            assert i <= tasks.getSize();
+
+            Task taskToDelete = tasks.getTask(i - 1);
             int prevSize = tasks.getSize() - 1;
 
-            tasks.removeTask(num - 1);
-            s.deleteLineInFile(num - 1);
+            tasks.removeTask(i - 1);
+            s.deleteLineInFile(i - 1);
 
             return ui.delete(taskToDelete, prevSize);
         } catch (ListOutOfBound | EmptyDescriptionException e) {
@@ -273,6 +279,7 @@ public class Command {
             if (term == null) {
                 throw new EmptyDescriptionException("find");
             }
+            assert term != null;
             List<Task> lst = tasks.findMatchingTask(term);
             return ui.matchLists(lst);
         } catch (EmptyDescriptionException e) {
