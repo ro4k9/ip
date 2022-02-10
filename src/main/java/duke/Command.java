@@ -65,7 +65,7 @@ public class Command {
         } else if (firstArg.equals("find")) {
             return findTask(secondArg, tasks, ui);
         } else if(firstArg.equals("reminder")) {
-            return getReminder(tasks, s, ui);
+            return getReminder(tasks, ui);
         } else {
             throw new UnknownCmdException();
         }
@@ -282,7 +282,7 @@ public class Command {
             }
             assert term != null;
             List<Task> lst = tasks.findMatchingTask(term);
-            return ui.matchLists(lst);
+            return ui.matchList(lst);
         } catch (EmptyDescriptionException e) {
             return e.getMessage();
         }
@@ -292,11 +292,10 @@ public class Command {
      * A method to get tasks with impending due/event date in the task list.
      *
      ** @param tasks           list of task
-     * @param s               storage to deal with making changes to text file
      * @param ui              display functionality of duke
      */
-    public String getReminder(TaskList tasks, Storage s, Ui ui) {
-        List<Task> lst = tasks.findTaskToRemind();
-        return "";
+    public String getReminder(TaskList tasks, Ui ui) {
+        List<Deadline> lst = tasks.findDeadlineToRemind();
+        return ui.reminderList(lst);
     }
 }

@@ -45,6 +45,10 @@ public class Deadline extends Task {
         return "D|" + super.format() + "|" + by;
     }
 
+    public LocalDate getDate() {
+        return by;
+    }
+
     /**
      * toString method for Deadline.
      *

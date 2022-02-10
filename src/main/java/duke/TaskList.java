@@ -1,6 +1,10 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -73,7 +77,7 @@ public class TaskList {
      * @return List of task containing the term
      */
     public List<Task> findMatchingTask(String term) {
-        List<Task> matching = new ArrayList<Task>();
+        List<Task> matching = new ArrayList<>();
         for (Task t : tasks) {
             if (t.getDescription().contains(term)) {
                 matching.add(t);
@@ -87,13 +91,22 @@ public class TaskList {
      *
      * @return List of task containing the tasks due within 24 hours
      */
-    public List<Task> findTaskToRemind() {
-        List<Task> tasksToRemind = new ArrayList<Task>();
-        for (Task task : tasks) {
-            if(task instanceof Deadline) {
+    public List<Deadline> findDeadlineToRemind() {
+        List<Deadline> tasksToRemind = new ArrayList<>();
+        LocalDate currDate = LocalDate.now();
 
+        for (Task task : tasks) {
+            long days = Long.MAX_VALUE;
+            if(task instanceof Deadline) {
+                LocalDate dueDate = ((Deadline) task).getDate();
+                days = Period.between(currDate, dueDate).getDays();
+            }
+            if(days <= 1) {
+                tasksToRemind.add(((Deadline) task));
             }
         }
+        tasksToRemind.sort((Deadline d1, Deadline d2)->Period.between(d2.getDate(), d1.getDate()).getDays());
         return tasksToRemind;
     }
+
 }
