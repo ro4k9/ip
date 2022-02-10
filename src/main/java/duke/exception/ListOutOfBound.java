@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * ListOutOfBOund is a class for handling exception when user selected a task that
@@ -6,7 +6,7 @@ package duke;
  *
  * @author Rosa Kang
  */
-class ListOutOfBound extends Exception {
+public class ListOutOfBound extends Exception {
     /**
      * Constructor for EmptyDescriptionException.
      *

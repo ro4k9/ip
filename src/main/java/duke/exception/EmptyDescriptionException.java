@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * EmptyDescriptionException is a class for handling exception where there is

@@ -1,11 +1,11 @@
-package duke;
+package duke.exception;
 
 /**
  * EmptyDescriptionException is a class for handling unknown commands
  *
  * @author Rosa Kang
  */
-class UnknownCmdException extends Exception {
+public class UnknownCmdException extends Exception {
     /**
      * Constructor for UnknownCmdException
      */

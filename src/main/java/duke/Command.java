@@ -1,12 +1,15 @@
 package duke;
 
+import duke.exception.EmptyDescriptionException;
+import duke.exception.ListOutOfBound;
+import duke.exception.UnknownCmdException;
+
 import java.io.IOException;
 import java.util.List;
 
 public class Command {
     protected String firstArg;
     protected String secondArg;
-    protected boolean isExit = false;
 
     /**
      * Constructor for Command
@@ -33,9 +36,9 @@ public class Command {
      * @param tasks list of task
      * @param ui display functionality of duke
      * @param s storage to deal with making changes to text file
-     * @throws EmptyDescriptionException
-     * @throws UnknownCmdException
-     * @throws IOException
+     * @throws EmptyDescriptionException deals with empty arguments
+     * @throws UnknownCmdException deals with unknown command
+     * @throws IOException deals with exception related to file amend
      */
     public String execute(TaskList tasks, Ui ui, Storage s) throws
             EmptyDescriptionException, UnknownCmdException, IOException {
@@ -64,17 +67,14 @@ public class Command {
         }
     }
 
-    public boolean isExit() {
-        return isExit;
-    }
-
     /**
      * A method to display a list of task.
+     *
+     * @param ui display functionality of duke
      */
     public String showList(Ui ui) { //throws IOException {
         return ui.lists();
     }
-
 
     /**
      * A method to mark the task complete.
@@ -90,21 +90,18 @@ public class Command {
                 throw new EmptyDescriptionException("mark");
             }
             assert taskIndex != null;
-
-            int i = Integer.parseInt(taskIndex);
-            if (i > tasks.getSize()) {
-                throw new ListOutOfBound(i);
+            int idx = Integer.parseInt(taskIndex);
+            if (idx > tasks.getSize()) {
+                throw new ListOutOfBound(idx);
             }
-            assert i <= tasks.getSize();
-            tasks.markTask(i);
-            s.changeMarkInFile(i - 1, true);
-            return ui.mark(tasks.getTask(i - 1).toString());
-        } catch (ListOutOfBound | EmptyDescriptionException e) {
+            assert idx <= tasks.getSize();
+            tasks.markTask(idx);
+            s.changeMarkInFile(idx - 1, true);
+            return ui.mark(tasks.getTask(idx - 1).toString());
+        } catch (ListOutOfBound | EmptyDescriptionException | IOException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
             return "The second argument of the mark must be an integer.";
-        } catch (IOException e) {
-            return e.getMessage();
         }
     }
 
@@ -123,20 +120,18 @@ public class Command {
             }
             assert taskIndex != null;
 
-            int i = Integer.parseInt(taskIndex);
-            if (i > tasks.getSize()) {
-                throw new ListOutOfBound(i);
+            int idx = Integer.parseInt(taskIndex);
+            if (idx > tasks.getSize()) {
+                throw new ListOutOfBound(idx);
             }
-            assert i <= tasks.getSize();
-            tasks.unmarkTask(i);
-            s.changeMarkInFile(i - 1, false);
-            return ui.unmark(tasks.getTask(i - 1).toString());
-        } catch (ListOutOfBound | EmptyDescriptionException e) {
+            assert idx <= tasks.getSize();
+            tasks.unmarkTask(idx);
+            s.changeMarkInFile(idx - 1, false);
+            return ui.unmark(tasks.getTask(idx - 1).toString());
+        } catch (ListOutOfBound | EmptyDescriptionException | IOException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
             return "The second argument of the unmark must be an integer.";
-        } catch (IOException e) {
-            return e.getMessage();
         }
     }
 
@@ -154,14 +149,12 @@ public class Command {
                 throw new EmptyDescriptionException("todo");
             }
             assert taskDescription != null;
-            Todo t;
-            t = new Todo(taskDescription);
-            tasks.addTask(t);
-            s.appendToFile(t.format());
-            return ui.tasks(t.toString(), tasks.getSize());
-        } catch (EmptyDescriptionException e) {
-            return e.getMessage();
-        } catch (IOException e) {
+            Todo todo;
+            todo = new Todo(taskDescription);
+            tasks.addTask(todo);
+            s.appendToFile(todo.format());
+            return ui.tasks(todo.toString(), tasks.getSize());
+        } catch (EmptyDescriptionException | IOException e) {
             return e.getMessage();
         }
     }
@@ -180,20 +173,19 @@ public class Command {
                 throw new EmptyDescriptionException("event");
             }
             assert taskDescription != null;
-            Event e;
-            String[] temp = Parser.parseDateAt(taskDescription);
-            if (temp.length < 2) {
+            Event event;
+            String[] description = Parser.parseDateAt(taskDescription);
+            if (description.length < 2) {
                 throw new EmptyDescriptionException("time for command event");
             } else {
-                e = new Event(temp[0], Parser.convertDate(temp[1]));
+                String eventDate = Parser.convertDate(description[1]);
+                event = new Event(description[0], eventDate);
             }
-            assert temp.length>=2;
-            tasks.addTask(e);
-            s.appendToFile(e.format());
-            return ui.tasks(e.toString(), tasks.getSize());
-        } catch (EmptyDescriptionException e) {
-            return e.getMessage();
-        } catch (IOException e) {
+            assert description.length >= 2;
+            tasks.addTask(event);
+            s.appendToFile(event.format());
+            return ui.tasks(event.toString(), tasks.getSize());
+        } catch (EmptyDescriptionException | IOException e) {
             return e.getMessage();
         }
     }
@@ -213,22 +205,20 @@ public class Command {
             }
             assert taskDescription != null;
 
-            Deadline t;
-            String[] temp = Parser.parseDateBy(taskDescription);
+            Deadline deadline;
+            String[] description = Parser.parseDateBy(taskDescription);
 
-            if (temp.length < 2) {
+            if (description.length < 2) {
                 throw new EmptyDescriptionException("time for command deadline");
             } else {
-                t = new Deadline(temp[0], Parser.convertDate(temp[1]));
+                deadline = new Deadline(description[0], Parser.convertDate(description[1]));
             }
-            assert temp.length>=2;
+            assert description.length >= 2;
 
-            tasks.addTask(t);
-            s.appendToFile(t.format());
-            return ui.tasks(t.toString(), tasks.getSize());
-        } catch (EmptyDescriptionException e) {
-            return e.getMessage();
-        } catch (IOException e) {
+            tasks.addTask(deadline);
+            s.appendToFile(deadline.format());
+            return ui.tasks(deadline.toString(), tasks.getSize());
+        } catch (EmptyDescriptionException | IOException e) {
             return e.getMessage();
         }
     }

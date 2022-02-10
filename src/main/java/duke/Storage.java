@@ -106,5 +106,4 @@ public class Storage {
         fw.write(textToAppend + "\n");
         fw.close();
     }
-
 }
