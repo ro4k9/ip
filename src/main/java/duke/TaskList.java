@@ -81,4 +81,19 @@ public class TaskList {
         }
         return matching;
     }
+
+    /**
+     * The method to find the tasks due within 24 hours
+     *
+     * @return List of task containing the tasks due within 24 hours
+     */
+    public List<Task> findTaskToRemind() {
+        List<Task> tasksToRemind = new ArrayList<Task>();
+        for (Task task : tasks) {
+            if(task instanceof Deadline) {
+
+            }
+        }
+        return tasksToRemind;
+    }
 }

@@ -1,10 +1,12 @@
 package duke;
 
 import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDateException;
 import duke.exception.ListOutOfBound;
 import duke.exception.UnknownCmdException;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Command {
@@ -62,6 +64,8 @@ public class Command {
             return deleteTask(secondArg, tasks, s, ui);
         } else if (firstArg.equals("find")) {
             return findTask(secondArg, tasks, ui);
+        } else if(firstArg.equals("reminder")) {
+            return getReminder(tasks, s, ui);
         } else {
             throw new UnknownCmdException();
         }
@@ -178,8 +182,8 @@ public class Command {
             if (description.length < 2) {
                 throw new EmptyDescriptionException("time for command event");
             } else {
-                String eventDate = Parser.convertDate(description[1]);
-                event = new Event(description[0], eventDate);
+                // String eventDate = Parser.convertDate(description[1]);
+                event = new Event(description[0], description[1]);
             }
             assert description.length >= 2;
             tasks.addTask(event);
@@ -210,15 +214,22 @@ public class Command {
 
             if (description.length < 2) {
                 throw new EmptyDescriptionException("time for command deadline");
-            } else {
-                deadline = new Deadline(description[0], Parser.convertDate(description[1]));
             }
             assert description.length >= 2;
+
+            String dueDateInString = description[1];
+            if(!Parser.isValidDate(dueDateInString)) {
+                throw new InvalidDateException();
+            }
+            assert Parser.isValidDate(dueDateInString);
+
+            LocalDate dueDate = Parser.convertDate(description[1]);
+            deadline = new Deadline(description[0], dueDate);
 
             tasks.addTask(deadline);
             s.appendToFile(deadline.format());
             return ui.tasks(deadline.toString(), tasks.getSize());
-        } catch (EmptyDescriptionException | IOException e) {
+        } catch (EmptyDescriptionException | IOException | InvalidDateException e) {
             return e.getMessage();
         }
     }
@@ -275,5 +286,17 @@ public class Command {
         } catch (EmptyDescriptionException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * A method to get tasks with impending due/event date in the task list.
+     *
+     ** @param tasks           list of task
+     * @param s               storage to deal with making changes to text file
+     * @param ui              display functionality of duke
+     */
+    public String getReminder(TaskList tasks, Storage s, Ui ui) {
+        List<Task> lst = tasks.findTaskToRemind();
+        return "";
     }
 }
