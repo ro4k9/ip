@@ -8,15 +8,15 @@ import java.util.List;
  * @author Rosa Kang
  */
 public class Ui {
-    private static final String LINE = "------------------------------------------";
-    private static final String GREETING_MSG = "-> Hi I'm Duke~\n-> What can I do for you?";
-    private static final String LIST_MSG = "-> Here are the tasks in your list:";
-    private static final String MARK_MSG = "-> Nice~ I've marked this task as *done*:";
-    private static final String UNMARK_MSG = "-> Okie~ I've marked this task as *not done* yet:";
-    private static final String FAREWELL_MSG = "-> ~*~*Cya soon*~*~!";
-    private static final String ADD_MSG = "-> Gotcha~ I've added this task:";
-    private static final String DELETE_MSG = "-> Noted~ I've removed this task:";
-    private static final String MATCH_MSG = "-> Here are the matching tasks in your list:\n";
+    private static final String GREETING_MSG = "Hi I'm Duke~\n-> What can I do for you?";
+    private static final String LIST_MSG = "-Here are the tasks in your list:";
+    private static final String MARK_MSG = "-Nice~ I've marked this task as *done*:";
+    private static final String UNMARK_MSG = "-Okie~ I've marked this task as *not done* yet:";
+    private static final String FAREWELL_MSG = "~*~*Cya soon*~*~!";
+    private static final String ADD_MSG = "Gotcha~ I've added this task:";
+    private static final String DELETE_MSG = "Noted~ I've removed this task:";
+    private static final String MATCH_MSG = "Here are the matching tasks in your list:\n";
+    private static final String REMINDER_MSG = "Here are the reminder (due within 24hr) in your list:\n";
     protected TaskList tasks;
 
     /**
@@ -44,7 +44,7 @@ public class Ui {
     public String lists() {
         String list = LIST_MSG + "\n";
         for (int i = 0; i < tasks.getSize(); i++) {
-            list += "    " + (i + 1) + "." + tasks.getTask(i) + "\n";
+            list += ("    " + (i + 1) + "." + tasks.getTask(i) + "\n");
         }
 
         return list;
@@ -100,13 +100,26 @@ public class Ui {
      *
      * @return tasks that matches the term given by user
     */
-    public String matchLists(List<Task> lst) {
+    public String matchList(List<Task> lst) {
 
         String list = MATCH_MSG + "\n";
         for (int i = 0; i < lst.size(); i++) {
             list += "    " + (i + 1) + "." + lst.get(i) + "\n";
         }
 
+        return list;
+    }
+
+    /**
+     * A method to display the list of tasks to remind
+     *
+     * @return tasks that matches the term given by user
+     */
+    public String reminderList(List<Deadline> lst) {
+        String list = REMINDER_MSG + "\n";
+        for (int i = 0; i < lst.size(); i++) {
+            list += "    " + (i + 1) + "." + lst.get(i) + "\n";
+        }
         return list;
     }
 }

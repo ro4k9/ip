@@ -82,13 +82,13 @@ public class Parser {
      * @param input String date input
      * @return reformatted String if the input is in valid date format else input
      */
-    public static String convertDate(String input) {
-        if (isValidDate(input)) {
+    public static LocalDate convertDate(String input)  {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate date = LocalDate.parse(input, format);
-            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        } else {
-            return input;
-        }
+            return LocalDate.parse(input, format);
+           //  return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
+    public static String dateToString(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 }

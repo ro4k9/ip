@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * Deadline class represents the task with a deadline.
  *
@@ -9,7 +11,7 @@ public class Deadline extends Task {
     /**
      * Store deadline of the task.
      */
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor for Deadline.
@@ -17,7 +19,7 @@ public class Deadline extends Task {
      * @param description a description of the deadline task
      * @param by          a deadline date
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
@@ -29,7 +31,7 @@ public class Deadline extends Task {
      * @param by          deadline date
      * @param isDone      completion of the task
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
@@ -43,6 +45,10 @@ public class Deadline extends Task {
         return "D|" + super.format() + "|" + by;
     }
 
+    public LocalDate getDate() {
+        return by;
+    }
+
     /**
      * toString method for Deadline.
      *
@@ -50,6 +56,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + Parser.dateToString(by) + ")";
     }
 }

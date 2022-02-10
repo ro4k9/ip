@@ -1,11 +1,14 @@
 package duke;
 
+import duke.exception.InvalidDateException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -54,6 +57,7 @@ public class Storage {
      */
     public void load() throws IOException {
         List<String> texts = Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
+
         for (int i = 0; i < texts.size(); i++) {
             String[] input = texts.get(i).split("\\|");
             boolean isDone = input[1].equals("1");
@@ -62,7 +66,8 @@ public class Storage {
             } else if (input[0].equals("E")) {
                 tasks.addTask(new Event(input[2], input[3], isDone));
             } else {
-                tasks.addTask(new Deadline(input[2], input[3], isDone));
+                LocalDate dueDate = Parser.convertDate(input[3]);
+                tasks.addTask(new Deadline(input[2], dueDate, isDone));
             }
         }
     }
