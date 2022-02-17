@@ -26,7 +26,7 @@ Description of the outcome:
 and date if applicable
 ```
 
-## `todo [task descriptioon]` - add todo
+###`todo [task descriptioon]` - add todo
 
 Use this command when you want to add todo to the task list
 
@@ -46,7 +46,7 @@ Artemis adds a new todo with a description do homework to the list.
 
 ```
 
-## `event [task description] /at [location or time] ` - add event
+###`event [task description] /at [location or time] ` - add event
 Use this command when you want to add event in the task. [Location or time] can be any text input.
 
 Example of usage:
@@ -66,7 +66,7 @@ Description of the outcome:
 Artemis adds the event titled birthday party and its location friend's house.
 ```
 
-## `deadline [task description] /by [date]` - add deadline
+### `deadline [task description] /by [date]` - add deadline
 
 Use this command when you want to add a deadline to the task list.
 Note that the date has to be in the format of yyyy-mm-dd. Otherwise there will be an error
@@ -88,7 +88,7 @@ Description of the outcome:
 Artemis adds the deadline task named assingment and the due date in the format of MMM-dd-yyyy.
 ```
 
-## `mark [task number]` - mark the task as complete
+###`mark [task number]` - mark the task as complete
 
 Use this command when you want to mark the task as complete. To find the task index type `list` and use the index given by the task list.
 
@@ -107,7 +107,7 @@ Description of the outcome:
 Artemis marks Task 2 (the number based on the index given in the task list).
 ```
 
-## `unmark [task number]` - unmark the task
+### `unmark [task number]` - unmark the task
 
 Use this command when you want to unmark the task that had been marked.
 
@@ -125,7 +125,7 @@ Description of the outcome:
 Artemis unmarks Task 2 (the number based on the index given in the task list) 
 ```
 
-##`delete [task number]` - delete the task
+###`delete [task number]` - delete the task
 
 Use this command when you want to delete the task.
 
@@ -144,7 +144,7 @@ Description of the outcome.
 ```
 Artemis deletes Task 2 (the number based on the index given in the task list).
 ```
-## `find [term]` - find the task containing the term
+###`find [term]` - find the task containing the term
 
 Use this command to find the task that contains a certain term
 
@@ -162,7 +162,7 @@ Description of the outcome.
 ```
 Artemis lists tasks that contains a term 'exam'.
 ```
-## `reminder` - list impending deadlines
+### `reminder` - list impending deadlines
 
 Use this command to see a list of deadline task with impending deadlines (tasks that are due within 24 hrs)
 
@@ -182,7 +182,7 @@ Description of the outcome.
 Artemis lists tasks that are due within 24hrs as of current date (Feb 18th 2022)
 ```
 
-## `bye` - quit Artemis 
+###`bye` - quit Artemis 
 
 Use this command to quit Artemis
 
