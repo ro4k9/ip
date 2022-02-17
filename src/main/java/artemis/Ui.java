@@ -17,7 +17,7 @@ public class Ui {
     private static final String FAREWELL_MSG = "~*~*Cya soon*~*~!";
     private static final String ADD_MSG = "Gotcha~ I've added this task:";
     private static final String DELETE_MSG = "Noted~ I've removed this task:";
-    private static final String MATCH_MSG = "Here are the matching tasks in your list:\n";
+    private static final String MATCH_MSG = "Here are the *matching tasks* in your list:\n";
     private static final String REMINDER_MSG = "Here are the reminder \n (due within 24hr) in your list:\n";
     protected TaskList tasks;
 
