@@ -25,6 +25,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     @FXML
     private javafx.scene.control.Button closeButton;
+
     /**
      * A variable storing Artemis chatbot.
      */
@@ -45,7 +46,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        scrollPane.setStyle("-fx-backgound-color: linear-gradient(to right, darkgreen, forestgreen)");
         String greeting = "Hi I'm Artemis~\nWhat can I do for you?";
         dialogContainer.getChildren().add(
                 DialogBox.getArtemisDialog(greeting, artemisImage)
@@ -73,6 +73,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getArtemisDialog(response, artemisImage)
         );
+        if (input.equals("bye")) {
+            javafx.application.Platform.exit();
+        }
         userInput.clear();
     }
 }
