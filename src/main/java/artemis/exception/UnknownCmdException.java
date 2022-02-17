@@ -1,4 +1,4 @@
-package duke.exception;
+package artemis.exception;
 
 /**
  * EmptyDescriptionException is a class for handling unknown commands

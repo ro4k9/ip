@@ -1,4 +1,4 @@
-package duke;
+package artemis;
 
 /**
  * A class representing and holding functionality of task

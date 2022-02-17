@@ -1,4 +1,4 @@
-package duke.gui;
+package artemis.gui;
 
 import javafx.application.Application;
 

@@ -1,12 +1,11 @@
-package duke.gui;
+package artemis.gui;
 import java.io.IOException;
 
-import duke.Duke;
+import artemis.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 

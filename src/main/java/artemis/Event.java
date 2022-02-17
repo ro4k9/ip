@@ -1,4 +1,4 @@
-package duke;
+package artemis;
 
 /**
  * Event class represents an event task.

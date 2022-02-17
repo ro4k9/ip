@@ -1,4 +1,4 @@
-package duke.exception;
+package artemis.exception;
 
 public class InvalidDateException extends Exception {
     /**

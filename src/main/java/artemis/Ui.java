@@ -1,6 +1,6 @@
-package duke;
+package artemis;
 
-import duke.storage.TaskList;
+import artemis.storage.TaskList;
 
 import java.util.List;
 

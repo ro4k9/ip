@@ -1,4 +1,4 @@
-package duke;
+package artemis;
 
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -1,4 +1,4 @@
-package duke;
+package artemis;
 
 /**
  * Todo class represents an todo task.

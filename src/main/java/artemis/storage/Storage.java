@@ -1,6 +1,6 @@
-package duke.storage;
+package artemis.storage;
 
-import duke.*;
+import artemis.*;
 
 import java.io.File;
 import java.io.FileWriter;

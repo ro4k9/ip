@@ -1,11 +1,11 @@
-package duke;
+package artemis;
 
 import java.io.IOException;
 
-import duke.exception.EmptyDescriptionException;
-import duke.exception.UnknownCmdException;
-import duke.storage.Storage;
-import duke.storage.TaskList;
+import artemis.exception.EmptyDescriptionException;
+import artemis.exception.UnknownCmdException;
+import artemis.storage.Storage;
+import artemis.storage.TaskList;
 
 /**
  * Duke class provides the functionality for Duke chatbot.

@@ -1,4 +1,4 @@
-package duke;
+package artemis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

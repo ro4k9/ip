@@ -1,8 +1,8 @@
-package duke.gui;
+package artemis.gui;
 
 import java.io.IOException;
 
-import duke.Duke;
+import artemis.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,10 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

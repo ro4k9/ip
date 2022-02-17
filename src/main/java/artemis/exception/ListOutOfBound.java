@@ -1,4 +1,4 @@
-package duke.exception;
+package artemis.exception;
 
 /**
  * ListOutOfBOund is a class for handling exception when user selected a task that

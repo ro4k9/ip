@@ -1,15 +1,15 @@
-package duke;
+package artemis;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidDateException;
-import duke.exception.ListOutOfBound;
-import duke.exception.UnknownCmdException;
-import duke.storage.Storage;
-import duke.storage.TaskList;
+import artemis.exception.EmptyDescriptionException;
+import artemis.exception.InvalidDateException;
+import artemis.exception.ListOutOfBound;
+import artemis.exception.UnknownCmdException;
+import artemis.storage.Storage;
+import artemis.storage.TaskList;
 
 public class Command {
     protected String firstArg;
