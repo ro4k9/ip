@@ -1,13 +1,15 @@
 package duke;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidDateException;
 import duke.exception.ListOutOfBound;
 import duke.exception.UnknownCmdException;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
+import duke.storage.Storage;
+import duke.storage.TaskList;
 
 public class Command {
     protected String firstArg;
@@ -64,7 +66,7 @@ public class Command {
             return deleteTask(secondArg, tasks, s, ui);
         } else if (firstArg.equals("find")) {
             return findTask(secondArg, tasks, ui);
-        } else if(firstArg.equals("reminder")) {
+        } else if (firstArg.equals("reminder")) {
             return getReminder(tasks, ui);
         } else {
             throw new UnknownCmdException();
@@ -218,7 +220,7 @@ public class Command {
             assert description.length >= 2;
 
             String dueDateInString = description[1];
-            if(!Parser.isValidDate(dueDateInString)) {
+            if (!Parser.isValidDate(dueDateInString)) {
                 throw new InvalidDateException();
             }
             assert Parser.isValidDate(dueDateInString);

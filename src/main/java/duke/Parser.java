@@ -76,18 +76,24 @@ public class Parser {
     }
 
     /**
-     * Convert date in the format yyyy-MM-dd to MMM dd yyyy if the input is a valid date.
+     * Convert String input to LocalDate
      * If not return the input as it is.
      *
      * @param input String date input
      * @return reformatted String if the input is in valid date format else input
      */
-    public static LocalDate convertDate(String input)  {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            return LocalDate.parse(input, format);
-           //  return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    public static LocalDate convertDate(String input) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(input, format);
     }
 
+    /**
+     * Convert date in the format yyyy-MM-dd to MMM dd yyyy in Striong
+     * If not return the input as it is.
+     *
+     * @param date date input
+     * @return reformatted date input in String
+     */
     public static String dateToString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
