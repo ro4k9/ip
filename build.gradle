@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "artemis.gui.Launcher"
+    mainClassName = "artemis.Launcher"
 }
 
 shadowJar {
