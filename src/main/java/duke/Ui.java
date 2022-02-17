@@ -1,5 +1,7 @@
 package duke;
 
+import duke.storage.TaskList;
+
 import java.util.List;
 
 /**
@@ -8,15 +10,14 @@ import java.util.List;
  * @author Rosa Kang
  */
 public class Ui {
-    private static final String GREETING_MSG = "Hi I'm Duke~\n-> What can I do for you?";
-    private static final String LIST_MSG = "-Here are the tasks in your list:";
-    private static final String MARK_MSG = "-Nice~ I've marked this task as *done*:";
-    private static final String UNMARK_MSG = "-Okie~ I've marked this task as *not done* yet:";
+    private static final String LIST_MSG = "Here are the tasks in your list:";
+    private static final String MARK_MSG = "Nice~ I've marked this task as *done*:";
+    private static final String UNMARK_MSG = "Okie~ I've marked this task as *not done* yet:";
     private static final String FAREWELL_MSG = "~*~*Cya soon*~*~!";
     private static final String ADD_MSG = "Gotcha~ I've added this task:";
     private static final String DELETE_MSG = "Noted~ I've removed this task:";
     private static final String MATCH_MSG = "Here are the matching tasks in your list:\n";
-    private static final String REMINDER_MSG = "Here are the reminder (due within 24hr) in your list:\n";
+    private static final String REMINDER_MSG = "Here are the reminder \n (due within 24hr) in your list:\n";
     protected TaskList tasks;
 
     /**
@@ -24,16 +25,6 @@ public class Ui {
      */
     public Ui(TaskList tasks) {
         this.tasks = tasks;
-    }
-
-
-    /**
-     * A method to display greeting message.
-     *
-     * @return greeting message
-     */
-    public String greeting() {
-        return GREETING_MSG;
     }
 
     /**

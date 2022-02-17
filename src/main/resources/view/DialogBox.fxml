@@ -7,7 +7,8 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" prefHeight="86.0" prefWidth="249.0" stylesheets="@../chatbox.css" text="Label" wrapText="true" />
+        <Label fx:id="dialog" style="-fx-background-color:bda7db;         -fx-text-fill:dimgrey;         -fx-border-radius: 20 20 20 20;         -fx-background-radius: 20 20 20 20;         -fx-label-padding:20 30;         -fx-background-insets:5;" stylesheets="@style.css" text="Label" wrapText="true" />
+
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
