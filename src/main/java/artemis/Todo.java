@@ -7,7 +7,7 @@ package artemis;
  */
 public class Todo extends Task {
     /**
-     * Constructor for Todo
+     * Constructor for Todo.
      *
      * @param description a description of the deadline task
      */
@@ -26,7 +26,7 @@ public class Todo extends Task {
     }
 
     /**
-     * toString method for Event.
+     * toString method for Todo.
      *
      * @return type of the task (event) marked by E and the description of the task followed by the date
      */
@@ -36,7 +36,7 @@ public class Todo extends Task {
     }
 
     /**
-     * format Todo to be stored into txt file.
+     * Format Todo to be stored into txt file.
      *
      * @return String representation of Todo for txt file
      */

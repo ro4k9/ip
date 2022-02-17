@@ -1,23 +1,23 @@
 package artemis;
 
 /**
- * A class representing and holding functionality of task
+ * A class representing and holding functionality of task.
  *
  * @author Rosa Kang
  */
 
 public class Task {
     /**
-     * Store a description of a task
+     * Store a description of a task.
      */
     protected String description;
     /**
-     * Store a boolean indicating completion of the task
+     * Store a boolean indicating completion of the task.
      */
     protected boolean isDone;
 
     /**
-     * Constructor for Task
+     * Constructor for Task.
      *
      * @param description a description of the deadline task
      */
@@ -27,7 +27,7 @@ public class Task {
     }
 
     /**
-     * Constructor for Task
+     * Constructor for Task.
      *
      * @param description a description of the deadline task
      * @param isDone      completion status
@@ -38,7 +38,7 @@ public class Task {
     }
 
     /**
-     * A method that display completion status in string
+     * Display completion status in string.
      *
      * @return Status Icon for a task
      */
@@ -47,14 +47,14 @@ public class Task {
     }
 
     /**
-     * A method that mark the task as complete
+     * Mark the task as complete.
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * A method that mark the task as incomplete
+     * Mark the task as incomplete.
      */
     public void markAsNotDone() {
         isDone = false;
@@ -66,7 +66,7 @@ public class Task {
 
 
     /**
-     * toString method of the task
+     * toString method of the task.
      *
      * @return status icon followed by a description of a task
      */

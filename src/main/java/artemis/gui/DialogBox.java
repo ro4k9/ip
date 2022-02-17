@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * An example of a custom control using FXML.
+ * A custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -26,6 +26,13 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * A constructor for DialogBox.
+     *
+     * @param text the text to be displayed on dialog box
+     * @param img the image to be displayed on dialog box
+     *
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -35,7 +42,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -52,11 +58,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * get the user's dialog box
+     *
+     * @param text the text to be displayed on the user's side
+     * @param img the img to be displayed on the user's side
+     * @return the user's dialog box
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * get the chatbot's dialog box
+     *
+     * @param text the text to be displayed on the chatbot's side
+     * @param img the img to be displayed on the chatbot's side
+     * @return the chatbot's dialog box
+     */
+    public static DialogBox getArtemisDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         db.setMinHeight(Region.USE_PREF_SIZE);

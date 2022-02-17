@@ -1,7 +1,7 @@
 package artemis;
 
 /**
- * Event class represents an event task.
+ * Event class represents an even task.
  *
  * @author Rosa Kang
  */

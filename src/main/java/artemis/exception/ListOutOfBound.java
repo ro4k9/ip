@@ -10,9 +10,9 @@ public class ListOutOfBound extends Exception {
     /**
      * Constructor for EmptyDescriptionException.
      *
-     * @param num is a invalid task number selected by the user
+     * @param idx invalid task number selected by the user
      */
-    public ListOutOfBound(int num) {
-        super("OOPS!!! You exceeded the bound!!\nTask " + num + " does not exist.");
+    public ListOutOfBound(int idx) {
+        super("OOPS!!! You exceeded the bound!!\nTask " + idx + " does not exist.");
     }
 }

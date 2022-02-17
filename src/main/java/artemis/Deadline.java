@@ -45,6 +45,11 @@ public class Deadline extends Task {
         return "D|" + super.format() + "|" + by;
     }
 
+    /**
+     * Retrieve variable by in Deadline.
+     *
+     * @return LocalDate object
+     */
     public LocalDate getDate() {
         return by;
     }

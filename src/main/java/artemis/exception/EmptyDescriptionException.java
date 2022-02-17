@@ -17,7 +17,7 @@ public class EmptyDescriptionException extends Exception {
     /**
      * Constructor for EmptyDescriptionException.
      *
-     * @param field that is required by the command
+     * @param field field that is required by the command
      */
     public EmptyDescriptionException(String field) {
         super("OOPS!!! The description of " + field + " cannot be empty.");

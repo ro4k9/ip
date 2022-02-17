@@ -1,15 +1,15 @@
 package artemis.storage;
 
-import artemis.Deadline;
-import artemis.Task;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import artemis.Deadline;
+import artemis.Task;
+
 /**
- * TaskList class contains the list of task
+ * TaskList class contains the list of task.
  *
  * @author Rosa Kang
  */
@@ -38,10 +38,10 @@ public class TaskList {
     /**
      * The method adds task to the list.
      *
-     * @param t the task to end to the list
+     * @param task the task to end to the list
      */
-    public void addTask(Task t) {
-        tasks.add(t);
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     /**
@@ -54,28 +54,28 @@ public class TaskList {
     }
 
     /**
-     * The method marks task at index i as complete.
+     * The method marks task at index idx as complete.
      *
-     * @param i the index of TaskList containing the task that needs to be edited (completion status)
+     * @param idx the index of TaskList containing the task that needs to be marked complete
      */
-    public void markTask(int i) {
-        tasks.get(i - 1).markAsDone();
+    public void markTask(int idx) {
+        tasks.get(idx - 1).markAsDone();
     }
 
     /**
      * The method marks task at i as incomplete.
      *
-     * @param i the index of TaskList containing the task that needs to be edited (completion status)
+     * @param idx the index of TaskList containing the task that needs to be marked incomplete
      */
-    public void unmarkTask(int i) {
-        tasks.get(i - 1).markAsNotDone();
+    public void unmarkTask(int idx) {
+        tasks.get(idx - 1).markAsNotDone();
     }
 
     /**
-     * The method to find the task with matching term given by the user
+     * The method to find the task with matching term given by the user.
      *
      * @param term search term in the list of task
-     * @return List of task containing the term
+     * @return the list of task containing the term
      */
     public List<Task> findMatchingTask(String term) {
         List<Task> matching = new ArrayList<>();
@@ -88,7 +88,7 @@ public class TaskList {
     }
 
     /**
-     * The method to find the tasks due within 24 hours
+     * The method to find the tasks due within 24 hours.
      *
      * @return List of task containing the tasks due within 24 hours
      */

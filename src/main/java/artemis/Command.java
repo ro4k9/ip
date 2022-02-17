@@ -11,12 +11,23 @@ import artemis.exception.UnknownCmdException;
 import artemis.storage.Storage;
 import artemis.storage.TaskList;
 
+/**
+ * Command class represents a command input given by a user.
+ *
+ * @author Rosa Kang
+ */
 public class Command {
+    /**
+     * Stores first argument of the command.
+     */
     protected String firstArg;
+    /**
+     * Stores second argument of the command.
+     */
     protected String secondArg;
 
     /**
-     * Constructor for Command
+     * Constructor for Command.
      *
      * @param firstArg first argument of the command
      */
@@ -25,7 +36,7 @@ public class Command {
     }
 
     /**
-     * Constructor for Command
+     * Constructor for Command.
      *
      * @param firstArg first argument of the command
      * @param secondArg second argument of the command
@@ -36,10 +47,12 @@ public class Command {
     }
 
     /**
+     * Execute command based on input given by the user.
      *
      * @param tasks list of task
-     * @param ui display functionality of duke
+     * @param ui display functionality of artemis
      * @param s storage to deal with making changes to text file
+     * @return String representation of the output of the user command
      * @throws EmptyDescriptionException deals with empty arguments
      * @throws UnknownCmdException deals with unknown command
      * @throws IOException deals with exception related to file amend
@@ -74,21 +87,23 @@ public class Command {
     }
 
     /**
-     * A method to display a list of task.
+     * Display a list of task.
      *
-     * @param ui display functionality of duke
+     * @param ui display functionality of Artemis
+     * @return String representation of the output of the command list
      */
     public String showList(Ui ui) { //throws IOException {
         return ui.lists();
     }
 
     /**
-     * A method to mark the task complete.
+     * Mark the task as complete.
      *
      * @param taskIndex index of the task to mark as complete
      * @param tasks     list of task
      * @param s         storage to deal with making changes to text file
-     * @param ui        display functionality of duke
+     * @param ui        display functionality of Artemis
+     * @return String representation of the output of the command mark
      */
     public String markTask(String taskIndex, TaskList tasks, Storage s, Ui ui) {
         try {
@@ -112,12 +127,13 @@ public class Command {
     }
 
     /**
-     * A method to mark the task incomplete.
+     * Mark the task as incomplete.
      *
      * @param taskIndex index of the task to mark as complete
      * @param tasks     list of task
      * @param s         storage to deal with making changes to text file
-     * @param ui        display functionality of duke
+     * @param ui        display functionality of Artemis
+     * @return String representation of the output of the command unmark
      */
     public String unmarkTask(String taskIndex, TaskList tasks, Storage s, Ui ui) {
         try {
@@ -142,12 +158,13 @@ public class Command {
     }
 
     /**
-     * A method to add a new todo into tasks list.
+     * Add a new todo into tasks list.
      *
      * @param taskDescription description of the task
      * @param tasks           list of task
      * @param s               storage to deal with making changes to text file
-     * @param ui              display functionality of duke
+     * @param ui              display functionality of Artemis
+     * @return String representation of the output of the user command todo
      */
     public String addTodo(String taskDescription, TaskList tasks, Storage s, Ui ui) {
         try {
@@ -166,12 +183,13 @@ public class Command {
     }
 
     /**
-     * A method to add a new event into tasks list.
+     * Add a new event into tasks list.
      *
      * @param taskDescription description of the task
      * @param tasks           list of task
      * @param s               storage to deal with making changes to text file
-     * @param ui              display functionality of duke
+     * @param ui              display functionality of Artemis
+     * @return String representation of the output of the command event
      */
     public String addEvent(String taskDescription, TaskList tasks, Storage s, Ui ui) {
         try {
@@ -184,7 +202,6 @@ public class Command {
             if (description.length < 2) {
                 throw new EmptyDescriptionException("time for command event");
             } else {
-                // String eventDate = Parser.convertDate(description[1]);
                 event = new Event(description[0], description[1]);
             }
             assert description.length >= 2;
@@ -202,7 +219,8 @@ public class Command {
      * @param taskDescription description of the task
      * @param tasks           list of task
      * @param s               storage to deal with making changes to text file
-     * @param ui              display functionality of duke
+     * @param ui              display functionality of Artemis
+     * @return String representation of the output of the command deadline
      */
     public String addDeadline(String taskDescription, TaskList tasks, Storage s, Ui ui) {
         try {
@@ -213,7 +231,6 @@ public class Command {
 
             Deadline deadline;
             String[] description = Parser.parseDateBy(taskDescription);
-
             if (description.length < 2) {
                 throw new EmptyDescriptionException("time for command deadline");
             }
@@ -227,9 +244,9 @@ public class Command {
 
             LocalDate dueDate = Parser.convertDate(description[1]);
             deadline = new Deadline(description[0], dueDate);
-
             tasks.addTask(deadline);
             s.appendToFile(deadline.format());
+
             return ui.tasks(deadline.toString(), tasks.getSize());
         } catch (EmptyDescriptionException | IOException | InvalidDateException e) {
             return e.getMessage();
@@ -237,12 +254,13 @@ public class Command {
     }
 
     /**
-     * A method to delete an existing task in tasks list.
+     * Delete an existing task in tasks list.
      *
      * @param taskDescription description of the task
      * @param tasks           list of task
      * @param s               storage to deal with making changes to text file
-     * @param ui              display functionality of duke
+     * @param ui              display functionality of Artemis
+     * @return String representation of the output of the command delete
      */
     public String deleteTask(String taskDescription, TaskList tasks, Storage s, Ui ui) throws IOException {
         try {
@@ -271,11 +289,12 @@ public class Command {
     }
 
     /**
-     * A method to delete an existing task in tasks list.
+     * Find an existing task matching the term given by the user.
      *
      * @param term  term to search for in the list of task
      * @param tasks list of task
-     * @param ui    display functionality of duke
+     * @param ui    display functionality of Artemis
+     * @return String representation of the output of the command find
      */
     public String findTask(String term, TaskList tasks, Ui ui) {
         try {
@@ -291,10 +310,11 @@ public class Command {
     }
 
     /**
-     * A method to get tasks with impending due/event date in the task list.
+     * A method to get tasks with impending due or event date in the task list.
      *
      ** @param tasks           list of task
-     * @param ui              display functionality of duke
+     * @param ui              display functionality of Artemis
+     * @return String representation of the output of the command reminder
      */
     public String getReminder(TaskList tasks, Ui ui) {
         List<Deadline> lst = tasks.findDeadlineToRemind();

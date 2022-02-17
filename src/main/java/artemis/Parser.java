@@ -28,10 +28,10 @@ public class Parser {
     }
 
     /**
-     * Parse a line of command into Duke command and user inputs following the command.
+     * Parse a line of command into 2 section. Artemis command and the description.
      *
      * @param input a line of user input
-     * @return an array of string containing command and the remaining user inputs
+     * @return an array of string containing command and the description
      */
     public static String[] parseCommand(String input) {
         return input.split(" ", 2);
@@ -41,7 +41,7 @@ public class Parser {
      * Parse a user input for command 'event' into description and date information.
      *
      * @param input a line of String containing task description and date
-     * @return an array of string containing description and date information
+     * @return an array of string containing the task description and date information
      */
     public static String[] parseDateAt(String input) {
         return input.split(" /at ", 2);
@@ -51,7 +51,7 @@ public class Parser {
      * Parse a user input for command 'deadline' into description and date information.
      *
      * @param input a line of String containing task description and date
-     * @return an array of string containing description and date information
+     * @return an array of string containing the task description and date information
      */
     public static String[] parseDateBy(String input) {
         return input.split(" /by ", 2);
@@ -62,7 +62,7 @@ public class Parser {
      * Checks if the input String is valid date (and is in correct format).
      *
      * @param date String date input
-     * @return an array of string containing description and date information.
+     * @return true if it is a valid date, false otherwise
      */
     public static boolean isValidDate(String date) {
         try {
@@ -76,11 +76,10 @@ public class Parser {
     }
 
     /**
-     * Convert String input to LocalDate
-     * If not return the input as it is.
+     * Convert String input of date to LocalDate.
      *
-     * @param input String date input
-     * @return reformatted String if the input is in valid date format else input
+     * @param input String date input in the format of yyyy-mm-dd
+     * @return LocalDate object containing date information in the format of yyyy-mm-dd
      */
     public static LocalDate convertDate(String input) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -88,10 +87,9 @@ public class Parser {
     }
 
     /**
-     * Convert date in the format yyyy-MM-dd to MMM dd yyyy in Striong
-     * If not return the input as it is.
+     * Convert date in the format yyyy-MM-dd to MMM dd yyyy in String
      *
-     * @param date date input
+     * @param date Local date
      * @return reformatted date input in String
      */
     public static String dateToString(LocalDate date) {

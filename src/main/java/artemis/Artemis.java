@@ -8,26 +8,32 @@ import artemis.storage.Storage;
 import artemis.storage.TaskList;
 
 /**
- * Duke class provides the functionality for Duke chatbot.
+ * Artemis class provides the functionality for Artemis chatbot.
  *
  * @author Rosa Kang
  */
-public class Duke {
+public class Artemis {
     /**
-     * For the display of the text on the console.
+     * Variable to store Ui object responsible for displaying the output of user command in String.
      */
     protected Ui ui;
+    /**
+     * Variable to store Storage object responsible for storing a task list in local drive.
+     */
     protected Storage s;
+    /**
+     * Variable to store TaskList object responsible for managing a task list.
+     */
     protected TaskList tasks;
 
     /**
-     * Constructor for Duke.
+     * Constructor for Artemis.
      */
-    public Duke() {
+    public Artemis() {
         try {
             tasks = new TaskList();
             ui = new Ui(tasks);
-            s = new Storage("data/duke.txt", tasks);
+            s = new Storage("data/artemis.txt", tasks);
             s.loadTextFile();
             s.load();
         } catch (IOException e) {
@@ -36,10 +42,10 @@ public class Duke {
     }
 
     /**
-     * Execute the command corresponding to the user input.
+     * Execute the command given by the user.
      *
      * @param fullCommand user input command
-     * @return string message baseds on user input command
+     * @return String representation of the output of the command
      */
     public String getResponse(String fullCommand) throws IOException {
         Command c = Parser.parser(fullCommand);

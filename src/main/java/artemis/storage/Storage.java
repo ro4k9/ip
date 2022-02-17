@@ -1,7 +1,5 @@
 package artemis.storage;
 
-import artemis.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +9,11 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
+import artemis.Deadline;
+import artemis.Event;
+import artemis.Parser;
+import artemis.Todo;
+
 /**
  * A class for loading and saving tasks information in local disk.
  *
@@ -18,10 +21,16 @@ import java.util.List;
  */
 public class Storage {
     /**
-     * For storing the path to txt file/
+     * A variable storing the path to txt file.
      */
     protected String path;
+    /**
+     * A variable storing the file object.
+     */
     protected File f;
+    /**
+     * A variable storing task list.
+     */
     protected TaskList tasks;
 
     /**
@@ -37,7 +46,7 @@ public class Storage {
 
     /**
      * If the text file exist at give path, create a file object to represent the file.
-     * If not create the text file.
+     * Otherwise create the text file.
      */
     public void loadTextFile() {
         f = new File(path);
@@ -75,28 +84,27 @@ public class Storage {
     /**
      * Delete a line given by n in txt file.
      *
-     * @param n line number to be deleted
+     * @param lineNumber number to be deleted
      */
-    public void deleteLineInFile(int n) throws IOException {
+    public void deleteLineInFile(int lineNumber) throws IOException {
         List<String> texts = Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
-        texts.remove(n);
+        texts.remove(lineNumber);
         Files.write(Paths.get(path), texts, StandardCharsets.US_ASCII);
     }
 
     /**
      * Change the completion status for task in txt file given in line n.
      *
-     * @param n line number that needs to be edited
+     * @param lineNumber line number that needs to be edited
      */
-    public void changeMarkInFile(int n, boolean isDone) throws IOException {
+    public void changeMarkInFile(int lineNumber, boolean isDone) throws IOException {
         List<String> texts = Files.readAllLines(Paths.get(path), StandardCharsets.US_ASCII);
-        String temp = texts.get(n);
+        String temp = texts.get(lineNumber);
         String[] arr = temp.split("\\|");
-        // String data = temp.replace(temp.substring(2,3), (isDone? "1":"0"));
         if (arr.length > 3) {
-            texts.set(n, arr[0] + (isDone ? "|1" : "|0") + "|" + arr[2] + "|" + arr[3]);
+            texts.set(lineNumber, arr[0] + (isDone ? "|1" : "|0") + "|" + arr[2] + "|" + arr[3]);
         } else {
-            texts.set(n, arr[0] + (isDone ? "|1" : "|0") + "|" + arr[2]);
+            texts.set(lineNumber, arr[0] + (isDone ? "|1" : "|0") + "|" + arr[2]);
         }
         Files.write(Paths.get(path), texts, StandardCharsets.US_ASCII);
     }
@@ -107,7 +115,7 @@ public class Storage {
      * @param textToAppend String of text to append to the txt file
      */
     public void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(path, true); // create a FileWriter in append mode
+        FileWriter fw = new FileWriter(path, true);
         fw.write(textToAppend + "\n");
         fw.close();
     }
