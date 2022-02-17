@@ -1,9 +1,9 @@
-# Duke Chatbot
-Duke chatbot is a java program that helps you to manage your tasks
+# ⋆⁺₊⋆ ☾⋆⁺₊⋆ARTEMIS⋆⁺₊⋆ ☾⋆⁺₊⋆
+Artemis is a java program that helps you to manage your tasks
 
 ## Usage
 
-### `list` - displays a list of all tasks
+### `list` - display a list of all tasks
 
 Use this command when you want a list of all tasks you have added so far.
 
@@ -13,138 +13,85 @@ Example of usage:
 
 Expected outcome:
 ```
-  n____n
- ( o v o )
---u-----u---------------------------------
 -> Here are the tasks in your list:
     1.[T][x] test1
-    2.[E][ ] test2  (at: Mon 2-4pm)
-    3.[D][ ] test5  (by: June 6th)
+    2.[E][ ] test2  (at: location)
+    3.[D][ ] test5  (by: Feb 02 2022)
 ```
-Description of the outcome.
+Description of the outcome:
 ```
-Duke lists command in a chronogical order based on time you add the tasks.
-The first box of the task indicates the type of task (todo, event, deadline). 
-The second box indicates the completion. This is followed by the description of a task and date.
+- Artemis lists command in a chronogical order based on time you add the tasks.
+- The first box of the task indicates the type of task (todo, event, deadline). 
+- The second box indicates the completion. This is followed by a description of a task 
+and date if applicable
 ```
 
-### `todo [description of the task] - add event to a list of tasks
+## `todo [task descriptioon]` - add todo
 
-Use this command when you want to add todo in the task.
+Use this command when you want to add todo to the task list
 
 Example of usage:
 
-`todo do homework
-`
+`todo do homework`
+
 Expected outcome:
 ```
-   n____n
-  ( ^ v ^ )
----u-----u--------------------------------
 Gotcha~ I've added this task:
     [T][ ] do homework
 Now you have 6 task in the list.
-------------------------------------------
 ```
-Description of the outcome.
+Description of the outcome:
 ```
-Duke adds the new todo do homework to the list.
+Artemis adds a new todo with a description do homework to the list.
 
 ```
 
-### `event [description of the task] /at [date] ` - add todo to a list of tasks
-
-Use this command when you want to add event in the task.
+## `event [task description] /at [location or time] ` - add event
+Use this command when you want to add event in the task. [Location or time] can be any text input.
 
 Example of usage:
 
 `
-event birthday party /at 9:00AM
+event birthday party /at friend's house
 `
 
 Expected outcome:
 ```
-   n____n
-  ( ^ v ^ )
----u-----u--------------------------------
 Gotcha~ I've added this task:
-    [E][ ] birthday pary (at: 9:00AM)
+    [E][ ] birthday pary (at: friend's house)
 Now you have 6 task in the list.
-------------------------------------------
 ```
-Description of the outcome.
+Description of the outcome:
 ```
-Duke adds the event titled birthday party and its date.
+Artemis adds the event titled birthday party and its location friend's house.
 ```
+
+## `deadline [task description] /by [date]` - add deadline
+
+Use this command when you want to add a deadline to the task list.
+Note that the date has to be in the format of yyyy-mm-dd. Otherwise there will be an error
 
 Example of usage:
 
 `
-event birthday party
+deadline assignment /by 2022-02-19
 `
 
 Expected outcome:
 ```
-   n____n
-  ( ^ v ^ )
----u-----u--------------------------------
 Gotcha~ I've added this task:
-    [E][ ] birthday pary (at: nil)
+    [D][ ] assignment (by: Feb 19 2022)
 Now you have 6 task in the list.
-------------------------------------------
 ```
-Description of the outcome.
+Description of the outcome:
 ```
-If no date has been specified by /at, Duke fills the date with nil.
-```
-### `Deadline [description of the task] /by [date]` - add deadline to a list of tasks
-
-Use this command when you want to add event in the task.
-
-Example of usage:
-
-`
-deadline assignment /by Monday
-`
-
-Expected outcome:
-```
-   n____n
-  ( ^ v ^ )
----u-----u--------------------------------
-Gotcha~ I've added this task:
-    [D][ ] assignment (by: Monday)
-Now you have 6 task in the list.
-------------------------------------------
-```
-Description of the outcome.
-```
-Duke adds the deadline assingment and the due date Monday.
+Artemis adds the deadline task named assingment and the due date in the format of MMM-dd-yyyy.
 ```
 
-Example of usage:
+## `mark [task number]` - mark the task as complete
 
-`
-deadline assingment
-`
+Use this command when you want to mark the task as complete. To find the task index type `list` and use the index given by the task list.
 
-Expected outcome:
-```
-   n____n
-  ( ^ v ^ )
----u-----u--------------------------------
-Gotcha~ I've added this task:
-    [D][ ] assignment (at: nil)
-Now you have 6 task in the list.
-------------------------------------------
-```
-Description of the outcome.
-```
-If no date has been specified by /by, Duke fills the date with nil.
-```
-### `mark [task number]` - mark the task complete
-
-Use this command when you want to mark the task.
 
 Example of usage:
 
@@ -152,21 +99,17 @@ Example of usage:
 
 Expected outcome:
 ```
-   n____n
-  ( > v < )n
----u--------------------------------------
 Nice~ I've marked this task as *done*:
-    [D][X] test6  (by: June 6th)
-------------------------------------------
+    [D][X] test6  (by: June 06 2022)
 ```
-Description of the outcome.
+Description of the outcome:
 ```
-Task 2 (the number is given in the list) is marked complete.
+Artemis marks Task 2 (the number based on the index given in the task list).
 ```
 
-### `unmark [task number]` - mark the task incomplete
+## `unmark [task number]` - unmark the task
 
-Use this command when you want to unmark the task.
+Use this command when you want to unmark the task that had been marked.
 
 Example of usage:
 
@@ -174,19 +117,15 @@ Example of usage:
 
 Expected outcome:
 ```
-   n____n
-  ( o _ o )
-------------------------------------------
 Okie~ I've marked this task as *not done* yet:
     [T][ ] test1
-------------------------------------------
 ```
-Description of the outcome.
+Description of the outcome:
 ```
-Task 2 (the number is given in the list) is marked complete.
+Artemis unmarks Task 2 (the number based on the index given in the task list) 
 ```
 
-### `delete [task number]` - delete the task
+##`delete [task number]` - delete the task
 
 Use this command when you want to delete the task.
 
@@ -196,23 +135,56 @@ Example of usage:
 
 Expected outcome:
 ```
-   n____n
-  ( o n o )
-------------------------------------------
 Noted~ I've removed this task:
-    [D][ ] test5  (by: June 6th)
+    [D][ ] test5  (by: June 06 2022)
 Now you have 3 task in the list.
-------------------------------------------
+
 ```
 Description of the outcome.
 ```
-Task 2 (the number is given in the list) is now deleted.
+Artemis deletes Task 2 (the number based on the index given in the task list).
+```
+## `find [term]` - find the task containing the term
+
+Use this command to find the task that contains a certain term
+
+Example of usage:
+
+`find exam`
+
+Expected outcome:
+```
+Here are the *matching tasks* in your list:
+    [E][] CS2103T exam (at: Zoom)
+    [E][] CS2101 mock-exam (at: NUS)
+```
+Description of the outcome.
+```
+Artemis lists tasks that contains a term 'exam'.
+```
+## `reminder` - list impending deadlines
+
+Use this command to see a list of deadline task with impending deadlines (tasks that are due within 24 hrs)
+
+Example of usage:
+
+`reminder`
+
+Expected outcome:
+```
+Here are the reminder 
+(due within 24hr) in your list:
+    [D][] CS2103T ip (by: Feb 18 2022)
+    [D][] CS2105 assignment (by: Feb 19 2022)
+```
+Description of the outcome.
+```
+Artemis lists tasks that are due within 24hrs as of current date (Feb 18th 2022)
 ```
 
+## `bye` - quit Artemis 
 
-### `bye` - quit Duke chatbot
-
-Use this command to quit Duke chatbot
+Use this command to quit Artemis
 
 Example of usage:
 
@@ -220,13 +192,5 @@ Example of usage:
 
 Expected outcome:
 ```
-   n____n
-n ( o v o )
-------------------------------------------
-~*~*Cya soon*~*~!
-------------------------------------------
-```
-Description of the outcome.
-```
-Duke chatbot program terminates.
+Artemis terminates.
 ```
