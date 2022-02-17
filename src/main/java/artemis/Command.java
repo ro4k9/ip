@@ -214,7 +214,7 @@ public class Command {
     }
 
     /**
-     * A method to add a new deadline into tasks list.
+     * Add a new deadline into tasks list.
      *
      * @param taskDescription description of the task
      * @param tasks           list of task

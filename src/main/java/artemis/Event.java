@@ -45,7 +45,7 @@ public class Event extends Task {
     }
 
     /**
-     * format Event to be stored into txt file.
+     * Format Event to be stored into txt file.
      *
      * @return String representation of Event for txt file
      */

@@ -76,7 +76,7 @@ public class Task {
     }
 
     /**
-     * format Task to be stored into txt file.
+     * Format Task to be stored into txt file.
      *
      * @return String representation of Task for txt file
      */

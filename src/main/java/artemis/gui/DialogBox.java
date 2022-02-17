@@ -59,7 +59,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * get the user's dialog box
+     * Get the user's dialog box.
      *
      * @param text the text to be displayed on the user's side
      * @param img the img to be displayed on the user's side
@@ -70,7 +70,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * get the chatbot's dialog box
+     * Get the chatbot's dialog box.
      *
      * @param text the text to be displayed on the chatbot's side
      * @param img the img to be displayed on the chatbot's side

@@ -37,7 +37,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * format Deadline to be stored into txt file.
+     * Format Deadline to be stored into txt file.
      *
      * @return String representation of Deadline for txt file
      */
